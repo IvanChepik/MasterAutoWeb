@@ -1,0 +1,77 @@
+<nb-card>
+    <nb-card-header>
+        Импорт списка студентов
+    </nb-card-header>
+    <nb-stepper #stepper orientation="horizontal" [linear]="linearMode">
+        <nb-step [stepControl]="formGroup.controls.file" [label]="labelOne">
+            <form #fileForm="ngForm">
+                <ng-template #labelOne>Загрузите ваш файл</ng-template>
+                <div class="uploader">
+                    <input 
+                    #formInputCsv 
+                    class="form-control"
+                    name="file"
+                    required
+                    type="file" 
+                    class ="upload-file" 
+                    ngModel
+                    #file="ngModel"
+                    accept=".xls,.xlsx,.csv" />
+                    <div id="drop-area-text" type="file"><p>{{ formGroup.controls.file.value ? formGroup.controls.file.value.name : 'Переместите сюда файл либо кликните для загрузки' }}</p></div>
+                </div>
+                <div>
+                    <button nbButton disabled nbStepperPrevious>Предыдущий</button>
+                    <button nbButton nbStepperNext>Следующий</button>
+                    <button (click)="clearFile()" nbButton>Очистить</button>
+                </div>
+            </form>
+        </nb-step>
+        <nb-step [label]="labelTwo">
+            <form [formGroup]="formGroupMapper">
+                <ng-template #labelTwo>Соотнесите колонки таблицы</ng-template>
+                <div class ="mapper-group">
+                        <div class="content">
+                            <div class="columns">
+                                <div class="row">
+                                        <div class="mapping-lists">
+                                            <div class="source-list">
+                                                <nb-list class="example-viewport">
+                                                    <h3 mat-subheader>Source fields</h3>
+                                                    <nb-list-item *ngFor="let map of mappedFields">
+                                                        <div class="source-destination-item">
+                                                            <h4 class="source-text" mat-line>{{ map.sourceField }}</h4>
+                                                            <nb-select class="dest-select-text" #selectBoxDestination [(selected)]='map.destinationField'  autoActiveFirstOption>
+                                                                <nb-option value="do not import">Не импортировать</nb-option>
+                                                                <nb-option *ngFor="let name of names" [value]="name">
+                                                                    {{name}}
+                                                                </nb-option>
+                                                            </nb-select>
+                                                        </div>                                                      
+                                                    </nb-list-item>
+                                                </nb-list>	
+                                            </div>										                                                
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+            <div>
+            <button nbButton nbStepperPrevious>Предыдущий</button>
+            <button nbButton (click)="goForwardMapping(stepper)">Следующий</button> 
+            </div>
+            </form>
+        </nb-step>
+        <nb-step [label]='labelThird' [stepControl]="formGroup.controls.listName"> 
+            <form [formGroup]="formGroup">
+                <ng-template #labelThird>Введите имя листа</ng-template>
+                <div class="list-name-container">
+                    <input nbInput placeholder="Имя листа" formControlName="listName">
+                </div>
+                <div>
+                    <button nbButton nbStepperPrevious>Предыдущий</button>
+                    <button nbButton (click)="onSubmit()">Готово</button> 
+                </div>
+            </form>
+        </nb-step>
+    </nb-stepper>
+</nb-card>

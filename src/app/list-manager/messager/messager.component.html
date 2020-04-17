@@ -1,0 +1,31 @@
+
+<nb-layout>
+    <nb-layout-column>
+        <div class="col-md-12 col-12">
+            <div class="row show-grid">   
+                <div class="col-md-12 col-12">
+                    <nb-card>
+                        <nb-card-header>
+                            <p class="header-template">Окно переписки</p>
+                        </nb-card-header>
+                        <nb-card-body>
+                            <nb-chat class="messager-column" class="messager-part">
+                                <nb-chat-message class = "chat-messager" *ngFor="let msg of history.messages"
+                                                type="text"
+                                                [message]="msg.messages"
+                                                reply="true"
+                                                [sender]= history.phone
+                                                [date]="msg.date"
+                                                >
+                                </nb-chat-message>
+                            <nb-chat-form (send)="sendMessage($event)">
+                            </nb-chat-form>
+                            </nb-chat>
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+                
+            </div>
+        </div>
+    </nb-layout-column>
+</nb-layout>

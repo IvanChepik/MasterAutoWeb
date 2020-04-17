@@ -1,0 +1,23 @@
+<nb-layout>
+    <nb-layout-header subheader>
+            <nb-icon id="menu-outline" icon="menu-outline" (click)="toggle()"></nb-icon>
+            <span class="label-container">|  Управление списками</span>
+    
+            <nb-user size="large"
+            [name]="userName"
+            badgeText="1"
+            badgeStatus="success"
+            badgePosition="bottom right">
+            </nb-user>
+            
+    </nb-layout-header>
+    
+    <nb-sidebar>
+            <nb-menu [items]="items" [autoCollapse]="true">
+            </nb-menu>
+    </nb-sidebar>
+    
+    <nb-layout-column>
+        <router-outlet></router-outlet>
+    </nb-layout-column>
+    </nb-layout>
