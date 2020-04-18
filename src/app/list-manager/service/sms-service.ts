@@ -7,6 +7,7 @@ import { ListInfo } from '../models/list-info';
 import { LeadList } from '../models/lead-list';
 import { Observable } from 'rxjs';
 import { ReceivedHistory } from '../models/history';
+import { SendMultiplyMessagesRequest } from '../models/send-multiply-sms';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +28,18 @@ export class SmsService {
             studentId:studentId,
             text:text           
         } });
+    }
+
+    sendSmsMessageMultiply(token, studentIdsList:string[], text:string):Observable<any>
+    {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+        const body = new SendMultiplyMessagesRequest(studentIdsList, text);
+
+        return this.http.post<any>(`${this.url}/StudentList`, body, { headers: headers });
     }
 
     getSms(token, studentId:string) : Observable<ReceivedHistory>
