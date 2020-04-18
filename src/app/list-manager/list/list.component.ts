@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { ListManagerService } from '../service/list-service';
 import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 import { ListInfo } from '../models/list-info';
@@ -115,7 +115,7 @@ export class ListComponent implements OnInit {
      console.log(this.settings);
    }
 
-   changeStateShowSendForm()
+   changeStateShowSendForm(event)
    {
      this.isSendFormShowed = !this.isSendFormShowed
    }

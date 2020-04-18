@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
     selector: 'app-mainpage',
     templateUrl: './mainpage.component.html',
-    styleUrls: ['/mainpage.component.less']
+    styleUrls: ['./mainpage.component.less']
   })
 export class MainpageComponent implements OnInit{
   
