@@ -1,0 +1,28 @@
+<nb-card>
+    <invite-users>     
+    </invite-users>
+    <nb-card-header>
+        Пользователи
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let user of users">
+                <div class="col-md-12">
+                    <div class="row show-grid">
+                        <div class="col-4 col-md-4">
+                            {{user.FirstName}} {{user.LastName}}
+                        </div>
+                        <div class="col-4 col-md-4">
+                            {{user.Role}}
+                        </div>
+                        <div class="col-4 col-md-4">
+                            <button nbButton (click)="openChangeRoleModal($event, user.Username)">
+                                Изменить роль
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

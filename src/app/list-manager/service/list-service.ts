@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
 })
 
 export class ListManagerService {
-    private url: string = environment.apiUrl + 'api/StudentInfo';
+    private url: string = environment.apiUrl + 'api/StudentListsService';
     constructor(private http: HttpClient) {}
 
     addList(leadListId: number, jsonString: string, mappings: Mapper[], userId: string, listName: string, listOfNewColumns: string[], token): Observable<LeadList> {
@@ -35,7 +35,7 @@ export class ListManagerService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<ListInfo[]>(`${this.url}/StudentList`, { headers: headers });
+        return this.http.get<ListInfo[]>(`${this.url}/StudentLists`, { headers: headers });
     }
 
     getListById(listId:string, token)

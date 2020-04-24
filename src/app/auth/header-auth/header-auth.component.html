@@ -10,7 +10,7 @@
 <ng-container *ngIf = "isAuth()"> 
         <div class="col-md-12">
             <div class="row show-grid user-info-block">   
-                    <div class="col-6 col-md-5 button-wrap"><nb-user shape="rectangle" ([showName])="userName" title="Engineer"></nb-user></div>
+                    <div class="col-6 col-md-5 button-wrap"><nb-user shape="rectangle" [name]="userName" [title]=""></nb-user></div>
                     <div class="col-6 col-md-5 button-wrap"><button (click)="logOut()" nbButton>Log out</button></div>          
             </div>
           </div>

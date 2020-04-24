@@ -9,8 +9,8 @@ import { User } from './models/user';
   templateUrl: './login.component.html',
 })
 export class NgxLoginComponent extends NbLoginComponent {
-  user= new User();
-  
+
+  user = new User();
 
   constructor(private authService: NbAuthService, protected router: Router, @Inject(NB_AUTH_OPTIONS) protected options = {}, protected cd: ChangeDetectorRef ) {
     super(authService, options, cd, router);

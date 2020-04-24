@@ -1,0 +1,21 @@
+<nb-card>
+    <nb-card-header>
+        Роли
+    </nb-card-header>
+    <nb-card-body>
+        <nb-list>
+            <nb-list-item *ngFor="let role of avaibleRoles">
+                <div class="col-md-12">
+                    <div class="row show-grid">
+                        <div class="col-7 col-md-7">
+                            {{role.roleName}}
+                        </div>
+                        <div class="col-5 col-md-5">
+                            <button nbButton (click)="openControlPermission($event, role.roleId, role.roleName)">Просмотр роли</button>
+                        </div>
+                    </div>
+                </div>
+            </nb-list-item>
+        </nb-list>
+    </nb-card-body>
+</nb-card>

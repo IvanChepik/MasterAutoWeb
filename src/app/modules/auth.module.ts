@@ -19,6 +19,7 @@ import {
 
 import { NgxLoginComponent } from '../auth/login/login.component';
 import { NgxRegisterComponent } from '../auth/register/register.component';
+import { NgxLogOutComponent } from '../auth/logout/logout.component';
 const formSetting: any = {
 	redirectDelay: 0,
 	showMessages: {
@@ -73,12 +74,11 @@ const formSetting: any = {
 				 method: 'post',
 			 },
 			 logout: {
-				endpoint: '/account/logout',
+				endpoint: '',
 				redirect: {
-					success: '/welcome',
+					success: '/',
 					failure: null,
 				},
-				method: 'post',
 			  },
 			resetPass: {
 				endpoint: '/auth/resetpass',
@@ -101,7 +101,8 @@ const formSetting: any = {
   
   declarations: [
       NgxLoginComponent,
-      NgxRegisterComponent
+	  NgxRegisterComponent,
+	  NgxLogOutComponent
   ]
 })
 export class NgxAuthModule {

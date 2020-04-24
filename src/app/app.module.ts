@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbUserModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbUserModule, NbDialogModule } from '@nebular/theme';
 import { HeaderComponent } from './shared/header/header.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
@@ -31,6 +31,7 @@ import { AuthService } from './list-manager/service/auth-service';
     HttpClientModule,
     NbCardModule,
     ListManagerRoutingModule,
+    NbDialogModule.forRoot(),
     AppRoutingModule,
     NbThemeModule.forRoot({ name: 'cosmic' }),
     NbAuthModule.forRoot({
@@ -56,7 +57,7 @@ import { AuthService } from './list-manager/service/auth-service';
              method: 'post', 
            },
            logout: {
-             endpoint: '/Logout',
+             endpoint: '/logout',
              method: 'post', 
            }
         }),

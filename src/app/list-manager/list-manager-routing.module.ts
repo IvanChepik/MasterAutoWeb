@@ -7,6 +7,8 @@ import { SharedComponent } from './shared/shared.component';
 import { ManagerMainComponent } from './manager-main/manager-main.component';
 import { ListComponent } from './list/list.component';
 import { MessagerComponent } from './messager/messager.component';
+import { RolePageComponent } from './role-page/role-page.component';
+import { UsersPageComponent } from './users-page/users-page';
 //import { SideMenuComponent } from '../shared/side-menu.component';
 //import { TemplatePageComponent } from '../templates-page/templates-page.component';
 
@@ -26,6 +28,14 @@ const childRoutes: Routes = [
     {
       path: 'messager/:studentId',
       component:MessagerComponent
+    },
+    {
+      path:'roles',
+      component:RolePageComponent
+    },
+    {
+      path:'all-users',
+      component:UsersPageComponent
     }
 
 ];

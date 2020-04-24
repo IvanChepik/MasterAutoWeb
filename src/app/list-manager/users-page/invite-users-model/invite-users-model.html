@@ -1,0 +1,19 @@
+<nb-card>
+    <nb-card-header>
+        Вышлите приглашение на почту
+    </nb-card-header>
+    <nb-card-body>
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-7 col-md-7">
+                    <input nbInput [(ngModel)]="emailToInvite">
+                </div>
+                <div class="col-5 col-md-5">
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+    <nb-card-footer>
+        <button nbButton (click)="sendInviteEmail($event)">Отправить</button>
+    </nb-card-footer>
+</nb-card>

@@ -12,12 +12,12 @@ import { Router } from '@angular/router';
   export class HeaderAuthComponent implements OnInit {
         
         user={};
-        userName:string="hello";
+        userName;
+        userTitle;
         token:NbAuthSimpleToken;
 
         constructor(private authService:NbAuthService, private accountService:AccountService, private router:Router)
-        {
-            
+        {  
             this.authService.onTokenChange()
             .subscribe((token: NbAuthSimpleToken) => {
                 if (token.isValid()) {
@@ -25,6 +25,8 @@ import { Router } from '@angular/router';
                     this.accountService.getUser(token).subscribe(userData => {
                         this.user = userData;
                         this.userName = userData.FirstName;
+                        this.userTitle = userData.LastName;
+                        console.log(userData)
                         
                     })
                 }
@@ -44,43 +46,22 @@ import { Router } from '@angular/router';
 
         isAuth() : boolean
         {
-            if (typeof this.token==='undefined')
-            {
-                console.log("hello");
-                return false
-                
-            }
-            if (this.token.isValid())
-            {   
-                console.log("hello");
-                return true;
-            }
-            else {
-                return false;
-            }
+            var isAuth:boolean;
+
+           this.authService.isAuthenticated().subscribe(result => {
+                isAuth = result;
+           });
+
+           return isAuth;
+
         }
 
         logOut()
         {
-            console.log(this.token);
-            this.accountService.logOut(this.token).subscribe(data => 
-                {
-                    console.log(data);
-                    this.authService.onTokenChange()
-                .subscribe((token: NbAuthSimpleToken) => {
-                if (token.isValid()) {
-                    this.token = token;
-                    this.accountService.getUser(token).subscribe(userData => {
-                        console.log(userData);
-                        
-                    })
-                }
-
-            });
-                })
+            this.router.navigateByUrl("/auth/logout");
         }
 
         ngOnInit(){
-        
+           
         }
   }

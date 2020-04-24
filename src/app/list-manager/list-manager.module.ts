@@ -22,6 +22,11 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { MessagerComponent } from './messager/messager.component';
 import { SmsService } from './service/sms-service';
 import { WriteMessageComponent } from './list/write-message/write-message.component';
+import { RolePageComponent } from './role-page/role-page.component';
+import { PermissionControlDialog } from './role-page/permission-control-dialog/permission-control-dialog';
+import { UsersPageComponent } from './users-page/users-page';
+import { InviteUserComponent } from './users-page/invite-users-model/invite-users-model';
+import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-role-modal';
 
 
 
@@ -60,6 +65,7 @@ import { WriteMessageComponent } from './list/write-message/write-message.compon
 	NbChatModule.forChild(),
   NbThemeModule.forRoot(),
   NbDialogModule.forRoot(),
+  NbCheckboxModule,
   ],
   
   providers:[
@@ -74,10 +80,17 @@ import { WriteMessageComponent } from './list/write-message/write-message.compon
     SharedComponent,
     ListComponent,
     MessagerComponent,
-    WriteMessageComponent
+    WriteMessageComponent,
+    RolePageComponent,
+    PermissionControlDialog,
+    InviteUserComponent,
+    UsersPageComponent,
+    ChangeRoleModalComponent
   ],
   entryComponents:[
-    
+    PermissionControlDialog,
+    InviteUserComponent, 
+    ChangeRoleModalComponent
   ],
 
   exports: [
