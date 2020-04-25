@@ -13,7 +13,7 @@ import { InfoService } from '../../service/info-service';
 export class InviteUserComponent implements OnInit{
   
     emailToInvite:string = "";
-
+    loading = false;
     token:any;
 
     constructor(private router:Router, 
@@ -31,14 +31,17 @@ export class InviteUserComponent implements OnInit{
     }
 
     ngOnInit(){
+      this.loading = true;
         this.roleService.getRoles(this.token).subscribe(data => {
             console.log(data);
+            this.loading = false;
         })
     }
 
     sendInviteEmail(event){
+      this.loading = true;
       this.infoService.sendRegistrationRequest(this.token, this.emailToInvite).subscribe(data => {
-
+        this.loading = false;
       })
     }
 }

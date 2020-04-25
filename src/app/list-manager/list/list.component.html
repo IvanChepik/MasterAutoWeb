@@ -1,12 +1,16 @@
-<nb-card>
+<nb-card >
     <nb-card-header>
         <button id="showingSendingFormButton" (click)="changeStateShowSendForm($event)" nbButton>Показать/убрать отправку</button>
         <div *ngIf = "isSendFormShowed">
-            <write-message-compo></write-message-compo>
+            <write-message-compo [studentLists]="selectedRows"></write-message-compo>
         </div>
     </nb-card-header>
-    <nb-card-body>
-        <ng2-smart-table [source]="listContent" [settings]="settings" (custom)="onCustomAction($event)">
+    <nb-card-body [nbSpinner]="loading" nbSpinnerStatus="success">
+        <ng2-smart-table 
+        [source]="listContent" 
+        [settings]="settings" 
+        (custom)="onCustomAction($event)"
+        (userRowSelect)="onUserRowSelect($event)">
 
         </ng2-smart-table>
     </nb-card-body>

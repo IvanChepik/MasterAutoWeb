@@ -30,7 +30,7 @@ export class SmsService {
         } });
     }
 
-    sendSmsMessageMultiply(token, studentIdsList:string[], text:string):Observable<any>
+    sendSmsMessageMultiply(token, studentIdsList:number[], text:string):Observable<any>
     {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
@@ -39,7 +39,7 @@ export class SmsService {
 
         const body = new SendMultiplyMessagesRequest(studentIdsList, text);
 
-        return this.http.post<any>(`${this.url}/StudentList`, body, { headers: headers });
+        return this.http.post<any>(`${this.url}/SendMessages`, body, { headers: headers });
     }
 
     getSms(token, studentId:string) : Observable<ReceivedHistory>

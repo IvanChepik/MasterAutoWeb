@@ -1,5 +1,5 @@
 export class SendMultiplyMessagesRequest {
-    constructor(public studentIds: string[],
+    constructor(public studentIds: number[],
 				public message: string) {}
 				
 }

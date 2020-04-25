@@ -12,21 +12,23 @@
         </div>
     </div>
 </div>
-<nb-list>
-    <nb-list-item *ngFor="let list of lists">
-        <div class="col-md-12 col-12">
-            <div [routerLink]="['view-list/', list.ListId]" class="row show-grid list-block">
-                <div class="col-md-8 col-8">
-                    <p class="list-name-text">
-                        {{list.Listname}}
-                    </p>
-                </div>
-                <div class="col-md-4 col-4">
-                    <p class="list-date-text">
-                        {{translateDateTimeToDate(list.Date)}}
-                    </p>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="success">
+    <nb-list>
+        <nb-list-item *ngFor="let list of lists">
+            <div class="col-md-12 col-12">
+                <div [routerLink]="['view-list/', list.ListId]" class="row show-grid list-block">
+                    <div class="col-md-8 col-8">
+                        <p class="list-name-text">
+                            {{list.Listname}}
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-4">
+                        <p class="list-date-text">
+                            {{translateDateTimeToDate(list.Date)}}
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nb-list-item>
-</nb-list>
+        </nb-list-item>
+    </nb-list>
+</nb-card>

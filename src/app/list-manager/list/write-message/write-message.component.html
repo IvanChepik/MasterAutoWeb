@@ -1,4 +1,6 @@
-<textarea id="textAreaMessage" nbInput>
+<textarea id="textAreaMessage" nbInput [(ngModel)]="message">
 
 </textarea>
-<button id="buttonSendMessage" nbButton>Отправить выделенным</button>
+<button (click)="sendMessageMultiply($event)" id="buttonSendMessage" nbButton>
+    Отправить выделенным
+</button>

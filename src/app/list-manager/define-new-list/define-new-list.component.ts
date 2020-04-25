@@ -43,6 +43,7 @@ import { Router } from '@angular/router';
         if(event != null && regexp.test(event.item(0).name)){			
           const file = event && event.item(0);
           this.formGroup.controls.file.setValue(file);
+          this.mappedFields = [];
           this.uploadListener();
         }
         else 
@@ -177,7 +178,7 @@ import { Router } from '@angular/router';
             this.user,
             ).subscribe(data => {
               console.log(data);
-              this.router.navigateByUrl("");
+              this.router.navigateByUrl("/action-lists");
             })
         }
       }

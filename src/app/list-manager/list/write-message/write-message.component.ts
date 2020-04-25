@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { SmsService } from '../../service/sms-service';
+import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 
 
 @Component({
@@ -9,15 +10,35 @@ import { SmsService } from '../../service/sms-service';
 })
 export class WriteMessageComponent implements OnInit {
 
-    @Input() studentListIds: string[];
+    @Input() studentLists: any;
+    message:string = "";
+    token:any;
 
-    constructor(private sendSmsService:SmsService)
+    constructor(private smsService:SmsService,
+                private authService:NbAuthService)
     {
-
+      this.authService.onTokenChange()
+        .subscribe((token: NbAuthSimpleToken) => {
+          if (token.isValid()) {
+            this.token = token;  
+         }
+  
+        }); 
     }
 
     ngOnInit(){
         
+    }
+
+    sendMessageMultiply(event){
+
+      var studentListIds = this.studentLists.map(element => {
+        return element.studentId;
+      })
+
+      this.smsService.sendSmsMessageMultiply(this.token, studentListIds, this.message).subscribe(data => {
+
+      })
     }
 
 }

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NbSidebarService, NbMenuItem } from '@nebular/theme';
+import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
+import { AccountService } from 'src/app/auth/services/account.service';
 
 
 @Component({
@@ -9,6 +11,7 @@ import { NbSidebarService, NbMenuItem } from '@nebular/theme';
 })
 export class SharedComponent implements OnInit {
 
+  token:any;
   userName: string;
   items: NbMenuItem[] = [
     {
@@ -17,35 +20,38 @@ export class SharedComponent implements OnInit {
       link: "/action-lists"
     },
     {
-      title: "Общий список",
-      icon: "layers-outline",
-      link: "/action-lists/filter-page"
-    },
-    {
       title: "Создание списка",
       icon: "download-outline",
       link: "/action-lists/new-list"
     },
     {
-      title:"Общение",
-      icon: "layers-outline",
-      children:[
-        {
-          title:"Шаблоны",
-          icon:"layers-outline",
-          link:"/action-lists/messaging/templates"
-        }
-      ]
+      title: "Роли",
+      icon: "shield-outline",
+      link: "/action-lists/roles"
+    },
+    {
+      title: "Пользователи",
+      icon: "people-outline",
+      link: "/action-lists/all-users"
     }
   ]
   constructor(private sidebarService: NbSidebarService,
+              private authService: NbAuthService, 
+              private accountService:AccountService
     ) { }
 
   ngOnInit() {
-    //this.authorizeService.getUser().subscribe( x=> {
-    //  this.userName = x.displayName;
-    //})
-    this.userName="hello";
+    this.authService.onTokenChange()
+            .subscribe((token: NbAuthSimpleToken) => {
+                if (token.isValid()) {
+                    this.token = token;
+                    this.accountService.getUser(token).subscribe(userData => {
+                        this.userName = userData.FirstName;
+                        console.log(userData)
+                        
+                    })
+                }
+            });
   }
 
   toggle() {
@@ -57,23 +63,19 @@ export class SharedComponent implements OnInit {
           link: "/action-lists"
         },
         {
-          title: "Общий список",
-          icon: "layers-outline",
-          link: "filter-page"
-        },
-        {
           title: "Создание списка",
           icon: "download-outline",
           link: "/action-lists/new-list"
         },
         {
-          title: "Общение",
-          children: [
-            {
-              title: 'Шаблоны',
-              link: "messaging/templates",
-            }
-          ],
+          title: "Роли",
+          icon: "shield-outline",
+          link: "/action-lists/roles"
+        },
+        {
+          title: "Пользователи",
+          icon: "people-outline",
+          link: "/action-lists/all-users"
         }
       ]
     }

@@ -7,7 +7,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbChatModule, NbUserModule, NbCardModule, NbListModule, NbAlertModule, NbInputModule, NbButtonModule, NbCheckboxModule, NbThemeModule, NbChatMessageComponent, NB_THEME_OPTIONS, DARK_THEME,
 NbLayoutComponent,
-NbLayoutModule, NbPopoverModule, NbStepperModule, NbSelectComponent, NbSelectModule, NbIconModule, NbSidebarModule, NbMenuModule, NbSidebarService, NbTreeGridModule, NbDialogModule} from '@nebular/theme';
+NbLayoutModule, NbPopoverModule, NbStepperModule, NbSelectComponent, NbSelectModule, NbIconModule, NbSidebarModule, NbMenuModule, NbSidebarService, NbTreeGridModule, NbDialogModule, NbSpinnerModule} from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -66,6 +66,7 @@ import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-
   NbThemeModule.forRoot(),
   NbDialogModule.forRoot(),
   NbCheckboxModule,
+  NbSpinnerModule
   ],
   
   providers:[

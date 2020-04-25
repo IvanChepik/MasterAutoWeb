@@ -15,7 +15,7 @@ import { PermissionControlDialog } from './permission-control-dialog/permission-
 export class RolePageComponent implements OnInit{
   
   token:any;
-
+  loading = false;
   avaibleRoles:Role[] = [];
 
   constructor(private router:Router, 
@@ -31,8 +31,10 @@ export class RolePageComponent implements OnInit{
     this.authService.onTokenChange()
       .subscribe((token: NbAuthSimpleToken) => {
         this.token = token;
+        this.loading = true;
         this.roleService.getRoles(token).subscribe(data => {
             this.avaibleRoles = data.roles;
+            this.loading = false;
             console.log(this.avaibleRoles);
         })
       });

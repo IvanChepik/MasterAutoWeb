@@ -15,10 +15,13 @@ import { MessagerComponent } from '../messager/messager.component';
 })
 export class ListComponent implements OnInit {
 
+    loading = false;
     user={};
     listId: string;
     isSendFormShowed:boolean = false;
     listContent ={};
+    selectedRows = [];
+
     //listContent = [
    //   {
     //    Property:"Иван", 
@@ -83,14 +86,15 @@ export class ListComponent implements OnInit {
 
    ngOnInit()
    {
+     this.loading = true;
     this.route.params.subscribe(data => {
         this.listId = data.listId;
         this.service.getListById(data.listId, this.user).subscribe(data => {
-            console.log(data);
             this.listContent = data.UserData;
+            console.log(data.UserData);
             this.headers = data.Mapper;
             this.defineColumns(data.Mapper);
-            console.log(this.settings);
+            this.loading = false;
         })
       });
    }
@@ -106,6 +110,7 @@ export class ListComponent implements OnInit {
       }
     });
     this.settings = Object.assign({},this.mySettings);
+    console.log(this.settings);
    }
 
    test()
@@ -126,6 +131,11 @@ export class ListComponent implements OnInit {
         this.openItemPage(event);
         break;
     }
+  }
+
+  public onUserRowSelect(event) {
+     this.selectedRows = event.selected;
+     console.log(event.selected)
   }
 
 }

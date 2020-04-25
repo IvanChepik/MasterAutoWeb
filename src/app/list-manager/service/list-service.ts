@@ -45,8 +45,6 @@ export class ListManagerService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<any>(`${this.url}/StudentList`, { headers: headers, params:{
-            id:listId           
-        } });
+        return this.http.get<any>(`${this.url}/StudentList/${listId}`, { headers: headers});
     }
 }

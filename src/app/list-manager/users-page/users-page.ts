@@ -17,6 +17,7 @@ export class UsersPageComponent implements OnInit{
   
   token:any;
   users:User[];
+  loading = false;
 
   constructor(private router:Router,
     private authService:NbAuthService, 
@@ -34,8 +35,10 @@ export class UsersPageComponent implements OnInit{
 
   ngOnInit()
   {
+    this.loading = true;
     this.permService.getUsers(this.token).subscribe(data => {
       this.users = data;
+      this.loading = false;
     })
   }
 

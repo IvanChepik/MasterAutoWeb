@@ -14,7 +14,8 @@ export class ManagerMainComponent implements OnInit {
 
     user={};
     lists={};
-
+    loading = false;
+    
     settings = {
       columns: {
         Property: {
@@ -42,8 +43,11 @@ export class ManagerMainComponent implements OnInit {
 
    ngOnInit()
    {
+      
+      this.loading = true;
       this.service.getListsByUser(this.user).subscribe(data => 
         {
+            this.loading = false;
             this.lists=data;
         })
    }

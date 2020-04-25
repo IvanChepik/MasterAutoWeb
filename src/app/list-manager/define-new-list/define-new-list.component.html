@@ -39,22 +39,31 @@
                                                     <h3 mat-subheader>Source fields</h3>
                                                     <nb-list-item *ngFor="let map of mappedFields">
                                                         <div class="source-destination-item">
-                                                            <h4 class="source-text" mat-line>{{ map.sourceField }}</h4>
-                                                            <nb-select class="dest-select-text" #selectBoxDestination [(selected)]='map.destinationField'  autoActiveFirstOption>
-                                                                <nb-option value="do not import">Не импортировать</nb-option>
-                                                                <nb-option *ngFor="let name of names" [value]="name">
-                                                                    {{name}}
-                                                                </nb-option>
-                                                            </nb-select>
+                                                            <div class="col-md-12">
+                                                                <div class="row show-grid">
+                                                                    <div class="col-7 col-md-7">
+                                                                        <h4 class="source-text" mat-line>{{ map.sourceField }}</h4>
+                                                                    </div>
+                                                                    <div class="col-5 col-md-5">
+                                                                    <nb-select class="dest-select-text" #selectBoxDestination [(selected)]='map.destinationField'  autoActiveFirstOption>
+                                                                        <nb-option value="do not import">Не импортировать</nb-option>
+                                                                        <nb-option *ngFor="let name of names" [value]="name">
+                                                                            {{name}}
+                                                                        </nb-option>
+                                                                    </nb-select>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            
                                                         </div>                                                      
                                                     </nb-list-item>
                                                 </nb-list>	
                                             </div>										                                                
-                                                    </div>
-                                                </div>
-                                            </div>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
             <div>
             <button nbButton nbStepperPrevious>Предыдущий</button>
             <button nbButton (click)="goForwardMapping(stepper)">Следующий</button> 
