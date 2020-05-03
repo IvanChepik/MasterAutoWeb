@@ -1,17 +1,31 @@
 <nb-card [nbSpinner]="loading" nbSpinnerStatus="success">
     <nb-card-header>
-        Роли
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-9 col-md-9">
+                    Роли
+                </div>
+                <div class="col-3 col-md-3">
+                    <button nbButton (click)="openNewRoleDialog($event)">Добавить новую роль</button>
+                </div>
+            </div>
+        </div>
+        
     </nb-card-header>
     <nb-card-body>
         <nb-list>
             <nb-list-item *ngFor="let role of avaibleRoles">
                 <div class="col-md-12">
                     <div class="row show-grid">
-                        <div class="col-7 col-md-7">
+                        <div class="col-8 col-md-8">
                             {{role.roleName}}
                         </div>
-                        <div class="col-5 col-md-5">
-                            <button nbButton (click)="openControlPermission($event, role.roleId, role.roleName)">Просмотр роли</button>
+                        <div class="col-2 col-md-2">
+                            <nb-icon icon="eye-outline"  (click)="openControlPermission($event, role.roleId, role.roleName)"></nb-icon>
+                        </div>
+
+                        <div class="col-2 col-md-2">
+                            <nb-icon icon="eye-outline"  (click)="openFieldDialog($event, role.roleId)"></nb-icon>
                         </div>
                     </div>
                 </div>

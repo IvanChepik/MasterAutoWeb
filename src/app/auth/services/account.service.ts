@@ -1,8 +1,12 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
+import { retry, catchError } from 'rxjs/operators';
 import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
+import { UserInfoRegistration } from 'src/app/list-manager/models/user-info-reg';
+import { RedirectService } from './redirect.service';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -11,25 +15,31 @@ import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 export class AccountService {
 
     private apiPrefix: string = environment.apiUrl + '/api/Account';
-    
-    constructor(private http: HttpClient, private authService: NbAuthService) {
-        
-    } 
 
-    getUser(token:NbAuthSimpleToken):Observable<any>
-    {
-        const headers = new HttpHeaders().set('Authorization', 'Bearer '+token);
-        return this.http.get<any>(`${this.apiPrefix}/UserInfo`, {headers:headers});
+    constructor(private http: HttpClient, 
+        private authService: NbAuthService,
+        private redirectService:RedirectService,
+        private router:Router) {
+
     }
 
-    logOut(token:NbAuthSimpleToken):Observable<any>
-    {
-        const headers = new HttpHeaders().set('Authorization', 'Bearer '+token);
-        return this.http.get<any>(`${this.apiPrefix}/Logout`, {headers:headers});
+    preregistrationStep(secureHandle: string): Observable<UserInfoRegistration> {
+
+        return this.http.get<UserInfoRegistration>(`${this.apiPrefix}/PreregistrationStep`, {
+            params:
+            {
+                secureHandle: secureHandle
+            }
+        });
     }
 
-    isAuth()
-    {
-        
+    checkSecureHandle(secureHandle: string): Observable<any> {
+        return this.http.get<any>(`${this.apiPrefix}/CheckSecureHandle`, {
+            params:
+            {
+                secureHandle: secureHandle
+            },
+            observe: 'response'
+        });
     }
 }

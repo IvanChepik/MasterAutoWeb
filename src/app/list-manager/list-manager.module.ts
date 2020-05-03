@@ -7,7 +7,7 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
 import {
   NbChatModule, NbUserModule, NbCardModule, NbListModule, NbAlertModule, NbInputModule, NbButtonModule, NbCheckboxModule, NbThemeModule, NbChatMessageComponent, NB_THEME_OPTIONS, DARK_THEME,
 NbLayoutComponent,
-NbLayoutModule, NbPopoverModule, NbStepperModule, NbSelectComponent, NbSelectModule, NbIconModule, NbSidebarModule, NbMenuModule, NbSidebarService, NbTreeGridModule, NbDialogModule, NbSpinnerModule} from '@nebular/theme';
+NbLayoutModule, NbPopoverModule, NbStepperModule, NbSelectComponent, NbSelectModule, NbIconModule, NbSidebarModule, NbMenuModule, NbSidebarService, NbTreeGridModule, NbDialogModule, NbSpinnerModule, NbRadioModule, NbTabsetModule} from '@nebular/theme';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +27,9 @@ import { PermissionControlDialog } from './role-page/permission-control-dialog/p
 import { UsersPageComponent } from './users-page/users-page';
 import { InviteUserComponent } from './users-page/invite-users-model/invite-users-model';
 import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-role-modal';
+import { NewRoleDialog } from './role-page/new-role-dialog/new-role-dialog';
+import { NoPermissionComponent } from './no-permission/no-permission.component';
+import { FieldsDialog } from './role-page/fields-dialog/fields-dialog';
 
 
 
@@ -42,6 +45,7 @@ import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-
   NbInputModule,
   NbButtonModule,
   CommonModule,
+  NbRadioModule,
   BrowserModule,
   BrowserAnimationsModule,
   NbPopoverModule,
@@ -66,7 +70,8 @@ import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-
   NbThemeModule.forRoot(),
   NbDialogModule.forRoot(),
   NbCheckboxModule,
-  NbSpinnerModule
+  NbSpinnerModule,
+  NbTabsetModule
   ],
   
   providers:[
@@ -86,12 +91,18 @@ import { ChangeRoleModalComponent } from './users-page/change-role-modal/change-
     PermissionControlDialog,
     InviteUserComponent,
     UsersPageComponent,
-    ChangeRoleModalComponent
+    ChangeRoleModalComponent,
+    NewRoleDialog,
+    NoPermissionComponent,
+    FieldsDialog
   ],
   entryComponents:[
     PermissionControlDialog,
     InviteUserComponent, 
-    ChangeRoleModalComponent
+    ChangeRoleModalComponent,
+    NewRoleDialog,
+    FieldsDialog,
+    MessagerComponent,
   ],
 
   exports: [

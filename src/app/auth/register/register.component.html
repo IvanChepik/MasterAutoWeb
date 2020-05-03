@@ -74,7 +74,24 @@
     </ng-container>
   </div>
 
-  
+  <div class="form-control-group">
+    <label class="label" for="input-phone">Телефон</label>
+    <input nbInput
+           [(ngModel)]="user.phoneNumber"
+           [(ngModel)]="userInfoRegistration.phoneNumber"
+           #phoneNumber="ngModel"
+           id="input-phone"
+           name="phoneNumber"
+           placeholder="Имя"
+           autofocus
+           fullWidth
+           fieldSize="large"
+           [status]="phoneNumber.dirty ? (phoneNumber.invalid  ? 'danger' : 'success') : 'basic'"
+           [required]=true
+           [minlength]=12
+           [maxlength]=12
+           [attr.aria-invalid]="firstName.invalid && firstName.touched ? true : null">
+  </div>
 
   <div class="form-control-group">
     <label class="label" for="input-email">Email:</label>
@@ -125,30 +142,6 @@
         от {{ getConfigValue('forms.validation.password.minLength') }}
         до {{ getConfigValue('forms.validation.password.maxLength') }}
         символов
-      </p>
-    </ng-container>
-  </div>
-
-  <div class="form-control-group">
-    <label class="label" for="input-re-password">Подтвердите пароль:</label>
-    <input nbInput
-           [(ngModel)]="user.confirmPassword"
-           #rePass="ngModel"
-           type="password"
-           id="input-re-password"
-           name="rePass"
-           placeholder="Подтвердите пароль"
-           fullWidth
-           fieldSize="large"
-           [status]="rePass.dirty ? (rePass.invalid || password.value != rePass.value  ? 'danger' : 'success') : 'basic'"
-           [required]="getConfigValue('forms.validation.password.required')"
-           [attr.aria-invalid]="rePass.invalid && rePass.touched ? true : null">
-    <ng-container *ngIf="rePass.invalid && rePass.touched">
-      <p class="caption status-danger" *ngIf="rePass.errors?.required">
-        Требуется подтверждение пароля!
-      </p>
-      <p class="caption status-danger" *ngIf="password.value != rePass.value && !rePass.errors?.required">
-        Подтверждение не соответсвует паролю.
       </p>
     </ng-container>
   </div>

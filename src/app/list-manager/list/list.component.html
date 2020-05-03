@@ -1,6 +1,15 @@
 <nb-card >
     <nb-card-header>
-        <button id="showingSendingFormButton" (click)="changeStateShowSendForm($event)" nbButton>Показать/убрать отправку</button>
+        <div class="col-md-12 col-12">
+            <div class="row show-grid">
+                <div class="col-md-8 col-8">
+                    <button id="showingSendingFormButton" (click)="changeStateShowSendForm($event)" nbButton>Показать/убрать отправку</button>
+                </div>
+                <div class="col-md-4 col-4">
+                    <button id="inviteButton" (click)="changeStateShowSendForm($event)" nbButton>Пригласить выбранных</button>
+                </div>
+            </div>
+        </div>
         <div *ngIf = "isSendFormShowed">
             <write-message-compo [studentLists]="selectedRows"></write-message-compo>
         </div>

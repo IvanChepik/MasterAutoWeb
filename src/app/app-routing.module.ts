@@ -9,6 +9,7 @@ import {
 	NbRequestPasswordComponent,
 	NbResetPasswordComponent,
   } from '@nebular/auth';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 
 const routes: Routes = [
@@ -19,6 +20,10 @@ const routes: Routes = [
 	{
 		path: 'auth',
 		loadChildren: './modules/auth.module#NgxAuthModule',
+	},
+	{
+		path: 'user-profile/:username',
+      	component:UserProfileComponent
 	},
 ];
 

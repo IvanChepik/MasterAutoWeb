@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { RolePushRequest } from '../models/role-push-request';
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
+import { PermissionUser } from '../models/permission-with-user-name';
 
 
 @Injectable({
@@ -26,17 +27,28 @@ export class PermissionService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<any>(`${this.url}/Permissions`, { headers: headers});
+        return this.http.get<any>(`${this.url}/ListOfPermissions`, { headers: headers});
     }
 
-    getUsers(token):Observable<User[]>{
+    getOwnPermission(token):Observable<PermissionUser>{
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<User[]>(`${this.url}/Users`, { headers: headers});
+        return this.http.get<PermissionUser>(`${this.url}/OwnPermissions`, { headers: headers})
     }
 
+    giveRoleToUser(token, name:string, roleId:number){
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+        return this.http.get<any>(`${this.url}/RoleToUser`, { headers: headers, params:{
+            name:name,
+            roleId:roleId.toString()           
+        }});
+    }
 
 }

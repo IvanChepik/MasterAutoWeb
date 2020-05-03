@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainpageComponent } from './mainpage/mainpage.component';
-import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbUserModule, NbDialogModule } from '@nebular/theme';
+import { NbThemeModule, NbLayoutModule, NbCardModule, NbButtonModule, NbUserModule, NbDialogModule, NbToastrModule, NbSpinnerModule, NbListModule, NbInputModule } from '@nebular/theme';
 import { HeaderComponent } from './shared/header/header.component';
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NbPasswordAuthStrategy, NbAuthModule } from '@nebular/auth';
@@ -16,7 +16,9 @@ import { HeaderAuthComponent } from './auth/header-auth/header-auth.component';
 import { MessagerComponent } from './list-manager/messager/messager.component';
 import { TemplatesComponent } from './list-manager/templates/templates.component';
 import { AuthService } from './list-manager/service/auth-service';
-
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import { SecureHandleInterceptor } from './secure-handle-interceptor';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,16 +26,22 @@ import { AuthService } from './list-manager/service/auth-service';
     MainpageComponent,
     HeaderComponent,
     HeaderAuthComponent,
-    TemplatesComponent
+    TemplatesComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
+    NbListModule,
+    FormsModule,
+    NbInputModule,
+    NbSpinnerModule,
     NbCardModule,
     ListManagerRoutingModule,
     NbDialogModule.forRoot(),
     AppRoutingModule,
-    NbThemeModule.forRoot({ name: 'cosmic' }),
+    NbToastrModule.forRoot(),
+    NbThemeModule.forRoot({ name: 'corporate' }),
     NbAuthModule.forRoot({
       strategies: [
         NbPasswordAuthStrategy.setup({
@@ -70,7 +78,13 @@ import { AuthService } from './list-manager/service/auth-service';
     NbUserModule,
     BrowserAnimationsModule,
   ],
-  providers: [AuthService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SecureHandleInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

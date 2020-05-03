@@ -20,6 +20,7 @@ export class PermissionControlDialog implements OnInit{
   allPermissions:Permission[];
   rolePemissions:string[];
   isEditable:boolean = false;
+  loading=false;
 
   constructor(private router:Router,
      private authService: NbAuthService,
@@ -31,16 +32,19 @@ export class PermissionControlDialog implements OnInit{
 
   ngOnInit()
   {
+    this.loading = true;
     this.authService.onTokenChange()
       .subscribe((token: NbAuthSimpleToken) => {
         this.token = token;
         this.permissionService.getPermissions(token).subscribe(data => {
             this.allPermissions = data;
             this.roleService.getRoleInfo(token, this.roleId.toString()).subscribe(data => {
+              console.log(data);
               this.rolePemissions = data.permissions.map(permission => {
                 return permission.permissionName;
               });
               this.definedPermissionsOnCheckBoxes(this.rolePemissions);
+              this.loading = false;
           })
         })
 

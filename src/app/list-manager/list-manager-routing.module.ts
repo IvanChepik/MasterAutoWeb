@@ -9,6 +9,7 @@ import { ListComponent } from './list/list.component';
 import { MessagerComponent } from './messager/messager.component';
 import { RolePageComponent } from './role-page/role-page.component';
 import { UsersPageComponent } from './users-page/users-page';
+import { NoPermissionComponent } from './no-permission/no-permission.component';
 //import { SideMenuComponent } from '../shared/side-menu.component';
 //import { TemplatePageComponent } from '../templates-page/templates-page.component';
 
@@ -36,6 +37,10 @@ const childRoutes: Routes = [
     {
       path:'all-users',
       component:UsersPageComponent
+    },
+    {
+      path:'no-permission',
+      component:NoPermissionComponent
     }
 
 ];

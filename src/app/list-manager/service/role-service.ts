@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { RolePushRequest } from '../models/role-push-request';
 import { Role } from '../models/role';
 import { RoleGetRequest } from '../models/role-get.request';
+import { RoleFieldPushRequest } from '../models/role-field-push-request';
+import { FieldGet } from '../models/field.get';
 
 @Injectable({
     providedIn: 'root'
@@ -67,5 +69,43 @@ export class RoleService {
         return this.http.delete<any>(`${this.url}/Role/${roleId}`, { headers: headers});
     }
 
+    getFields(token, roleId:number):Observable<FieldGet[]>{
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+
+        return this.http.get<FieldGet[]>(`${this.url}/Role/${roleId}/Fields`, { headers: headers, params: {
+            id:roleId.toString()
+        }});
+
+    }
+
+    addField(token, roleId:number, fieldName:string, rolesOfVisible:number[]){
+
+        var body = new RoleFieldPushRequest(fieldName, rolesOfVisible);
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+        return this.http.put<any>(`${this.url}/Role/${roleId}/Field`, body, { headers: headers });
+
+    }
+
+    deleteField(token, roleId:number, fieldName:string){
+
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+        return this.http.delete<any>(`${this.url}/Role/${roleId}`, { headers: headers, params: {
+            fieldName:fieldName
+        }});
+
+    }
 
 }

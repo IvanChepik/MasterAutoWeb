@@ -13,12 +13,15 @@
                             {{user.FirstName}} {{user.LastName}}
                         </div>
                         <div class="col-4 col-md-4">
-                            {{user.Role}}
+                            {{user.Role?.roleName}}
                         </div>
-                        <div class="col-4 col-md-4">
-                            <button nbButton (click)="openChangeRoleModal($event, user.Username)">
+                        <div class="col-3 col-md-3">
+                            <button nbButton (click)="openChangeRoleModal($event, user)">
                                 Изменить роль
                             </button>
+                        </div>
+                        <div class="col-1 col-md-1">
+                            <nb-icon (click)="openUserInfo($event, user.Username)" icon="eye-outline"></nb-icon>
                         </div>
                     </div>
                 </div>

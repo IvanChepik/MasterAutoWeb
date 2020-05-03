@@ -6,5 +6,9 @@ export class Role{
         public permissions:Permission[],
         public roleName:string
     )
-    {}
+    {
+    
+    }
+
+    public isChecked:boolean = false;
 }

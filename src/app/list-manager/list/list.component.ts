@@ -4,8 +4,11 @@ import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 import { ListInfo } from '../models/list-info';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
-import { NbSidebarService, NbDialogService } from '@nebular/theme';
+import { NbSidebarService, NbDialogService, NbToastrService } from '@nebular/theme';
 import { MessagerComponent } from '../messager/messager.component';
+import { RedirectService } from 'src/app/auth/services/redirect.service';
+import { PermissionService } from '../service/permission-service';
+import { EmailService } from '../service/email-service';
 
 
 @Component({
@@ -57,6 +60,7 @@ export class ListComponent implements OnInit {
       },
 
       actions:{
+        
         custom: 
         [{ name: 'viewrecord', title: '<i class="nb-search"></i>'}],
       }
@@ -73,7 +77,15 @@ export class ListComponent implements OnInit {
       
     }
 
-    constructor(private router: Router, private authService: NbAuthService, private service:ListManagerService, private route: ActivatedRoute, private dialogService:NbDialogService)
+    constructor(private router: Router, 
+      private authService: NbAuthService, 
+      private service:ListManagerService, 
+      private route: ActivatedRoute, 
+      private dialogService:NbDialogService,
+      private permissionService:PermissionService,
+      private redirectService:RedirectService,
+      private emailService:EmailService, 
+      private toastrService: NbToastrService)
     {
         this.authService.onTokenChange()
         .subscribe((token: NbAuthSimpleToken) => {
@@ -86,17 +98,28 @@ export class ListComponent implements OnInit {
 
    ngOnInit()
    {
-     this.loading = true;
-    this.route.params.subscribe(data => {
-        this.listId = data.listId;
-        this.service.getListById(data.listId, this.user).subscribe(data => {
+     
+    this.permissionService.getOwnPermission(this.user).subscribe(data => {
+      if(data.permissions.find(x => x.permissionName == "StudentsListsMaintenance"))
+      {
+            this.loading = true;
+            this.route.params.subscribe(data => {
+            this.listId = data.listId;
+            this.service.getListById(data.listId, this.user).subscribe(data => {
             this.listContent = data.UserData;
             console.log(data.UserData);
             this.headers = data.Mapper;
             this.defineColumns(data.Mapper);
             this.loading = false;
-        })
-      });
+         })
+        });
+      }
+      else
+      {
+        this.redirectService.redirectToNoAccess(this.router);
+      }
+    });
+     
    }
 
    defineColumns(headers)
@@ -136,6 +159,24 @@ export class ListComponent implements OnInit {
   public onUserRowSelect(event) {
      this.selectedRows = event.selected;
      console.log(event.selected)
+  }
+
+  inviteStudents(event){
+
+    this.loading = true;
+
+    var studentListIds = this.selectedRows.map(element => {
+      return element.studentId;
+    })
+
+    this.emailService.inviteStudentMultiply(this.user, studentListIds).subscribe(data => {
+      this.loading = false;
+      this.showToast('top-right', 'Ваше приглашение отправлено')
+    });
+  }
+
+  showToast(position, message) {
+    this.toastrService.show(message, 'Готово!', { position });
   }
 
 }

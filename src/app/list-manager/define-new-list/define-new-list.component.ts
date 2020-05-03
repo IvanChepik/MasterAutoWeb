@@ -9,6 +9,8 @@ import { DataSource } from '@angular/cdk/table';
 import { MatTableDataSource } from '@angular/material/table';
 import { ListManagerService } from '../service/list-service';
 import { Router } from '@angular/router';
+import { PermissionService } from '../service/permission-service';
+import { RedirectService } from 'src/app/auth/services/redirect.service';
 
 
 @Component({
@@ -19,6 +21,7 @@ import { Router } from '@angular/router';
   })
   export class DefineNewListComponent implements OnInit {
 
+    isLoading = false;
     linearMode = true;
     headers: string[];
     json: string = "";
@@ -111,7 +114,13 @@ import { Router } from '@angular/router';
       user={};
   
 
-  constructor(private router:Router, private authService: NbAuthService, private http :HttpClient, private formBuilder: FormBuilder, private service:ListManagerService) {
+  constructor(private router:Router, 
+    private authService: NbAuthService,
+     private http :HttpClient, 
+     private redirectService:RedirectService,
+     private permissionService:PermissionService,
+     private formBuilder: FormBuilder, 
+     private service:ListManagerService) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthSimpleToken) => {
         if (token.isValid()) {
@@ -123,22 +132,21 @@ import { Router } from '@angular/router';
 
     ngOnInit()
     {
-      this.formGroupMapper = this.formBuilder.group({
-        mapCtrl: new FormControl(''),
-        newColumn: new FormControl('')
+      this.permissionService.getOwnPermission(this.user).subscribe(data => {
+        if(data.permissions.find(x => x.permissionName == "StudentsListsMaintenance"))
+        {
+          this.formGroupMapper = this.formBuilder.group({
+            mapCtrl: new FormControl(''),
+            newColumn: new FormControl('')
+          });
+        }
+        else
+        {
+          this.redirectService.redirectToNoAccess(this.router);
+        }
       });
+      
 
-      this.getUser();
-
-    }
-
-    getUser()
-    {
-      const headers = new HttpHeaders().set('Authorization', 'Bearer '+this.user);
-      this.http.get<any>(`https://twm-api.azurewebsites.net/api/Account/UserInfo`, {headers:headers}).subscribe(data =>
-      {
-        console.log(data);
-      })
     }
 
     clearFile()
@@ -166,6 +174,8 @@ import { Router } from '@angular/router';
 
     onSubmit():void
     {
+      this.isLoading = true;
+      console.log("hello");
       if(this.formGroup.controls.listName.value){
         if(this.formGroup.controls.listName.valid) {
           this.service.addList(
@@ -177,6 +187,7 @@ import { Router } from '@angular/router';
             null,
             this.user,
             ).subscribe(data => {
+              this.isLoading = false;
               console.log(data);
               this.router.navigateByUrl("/action-lists");
             })

@@ -14,7 +14,7 @@ import { SendMultiplyMessagesRequest } from '../models/send-multiply-sms';
 })
 
 export class SmsService {
-    private url: string = environment.apiUrl + 'api/StudentInfo';
+    private url: string = environment.apiUrl + 'api/MessageService/SmsClient';
     constructor(private http: HttpClient) {}
 
     SendMessage(token, studentId:string, text:string):Observable<any>
@@ -24,8 +24,7 @@ export class SmsService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<any>(`${this.url}/SendMessage`, { headers: headers, params:{
-            studentId:studentId,
+        return this.http.get<any>(`${this.url}/student/${studentId}/SendSms`, { headers: headers, params:{
             text:text           
         } });
     }
@@ -49,7 +48,7 @@ export class SmsService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<ReceivedHistory>(`${this.url}/Messages/${studentId}`, { headers: headers});
+        return this.http.get<ReceivedHistory>(`${this.url}/student/${studentId}/messages`, { headers: headers});
     }
     
 }

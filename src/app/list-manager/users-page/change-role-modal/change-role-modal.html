@@ -1,8 +1,29 @@
 <nb-card>
     <nb-card-header>
-        Изменить роль
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-7 col-md-7">
+                    Изменить роль
+                </div>        
+                <div class="col-5 col-md-5">
+                    <button nbButton (click)="editRole($event)">Готово</button>
+                </div>       
+            </div>
+        </div>
     </nb-card-header>
-    <nb-card-body>
-        Контент
+    <nb-card-body [nbSpinner]="loading" nbSpinnerStatus="success">
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-12 col-md-12">
+                    <nb-radio-group [(ngModel)]="roleId">
+                        <nb-radio 
+                        *ngFor="let role of allRoles.roles" 
+                        [value]="role.roleId">
+                            {{role.roleName}}
+                        </nb-radio>
+                    </nb-radio-group>
+                </div>        
+            </div>
+        </div> 
     </nb-card-body>
 </nb-card>

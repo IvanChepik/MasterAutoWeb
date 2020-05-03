@@ -3,6 +3,8 @@ import { ListManagerService } from '../service/list-service';
 import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 import { ListInfo } from '../models/list-info';
 import { Router } from '@angular/router';
+import { PermissionService } from '../service/permission-service';
+import { RedirectService } from 'src/app/auth/services/redirect.service';
 
 
 @Component({
@@ -30,12 +32,17 @@ export class ManagerMainComponent implements OnInit {
       }
     };
 
-    constructor(private authService: NbAuthService, private service:ListManagerService, private router:Router)
+    constructor(private authService: NbAuthService, 
+      private service:ListManagerService, 
+      private router:Router,
+      private permissionService:PermissionService,
+      private redirectService:RedirectService)
     {
         this.authService.onTokenChange()
         .subscribe((token: NbAuthSimpleToken) => {
           if (token.isValid()) {
-            this.user = token;  
+            this.user = token;
+         
           }
   
         }); 
@@ -45,11 +52,21 @@ export class ManagerMainComponent implements OnInit {
    {
       
       this.loading = true;
-      this.service.getListsByUser(this.user).subscribe(data => 
+      this.permissionService.getOwnPermission(this.user).subscribe(data => {
+        if(data.permissions.find(x => x.permissionName == "StudentsListsMaintenance"))
         {
-            this.loading = false;
-            this.lists=data;
-        })
+          
+          this.service.getListsByUser(this.user).subscribe(data => 
+            {
+                this.loading = false;
+                this.lists=data;
+            })
+        }
+        else
+        {
+          this.redirectService.redirectToNoAccess(this.router);
+        }
+      });
    }
 
    translateDateTimeToDate(datetime:string) : string

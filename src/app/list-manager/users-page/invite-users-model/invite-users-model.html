@@ -5,11 +5,33 @@
     <nb-card-body>
         <div class="col-md-12">
             <div class="row show-grid">
-                <div class="col-7 col-md-7">
-                    <input nbInput [(ngModel)]="emailToInvite">
+
+                <div class="col-4 col-md-4">
+                    <p class="header-text">Имя</p>
+                    <input nbInput [(ngModel)]="firstNameToInvite">
                 </div>
-                <div class="col-5 col-md-5">
+                <div class="col-4 col-md-4">
+                    <p class="header-text">Фамилия</p>
+                    <input nbInput [(ngModel)]="lastNameToInvite">
                 </div>
+                <div class="col-4 col-md-4">
+                    <p class="header-text">Телефон</p>
+                    <input nbInput [(ngModel)]="phoneNumberToInvite">
+                </div>
+                
+                <div class="col-8 col-md-8">
+                    <p class="header-text">Почта</p>
+                    <input id="emailToinviteInput" nbInput [(ngModel)]="emailToInvite">
+                </div>
+                <div class="col-4 col-md-4">
+                    <p class="header-text">Роль</p>
+                    <nb-select [(ngModel)]="roleIdToInvite">
+                        <nb-option [value]="role.roleId" *ngFor="let role of allRoles.roles">
+                            {{role.roleName}}
+                        </nb-option>
+                    </nb-select>
+                </div>
+
             </div>
         </div>
     </nb-card-body>

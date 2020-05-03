@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { NbSidebarService, NbMenuItem } from '@nebular/theme';
 import { NbAuthService, NbAuthSimpleToken } from '@nebular/auth';
 import { AccountService } from 'src/app/auth/services/account.service';
+import { UserInfoService } from 'src/app/auth/services/user-info.service';
+import { StudentInfoService } from '../service/student-info-service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +14,8 @@ import { AccountService } from 'src/app/auth/services/account.service';
 })
 export class SharedComponent implements OnInit {
 
-  token:any;
+  token: any;
+  email:string;
   userName: string;
   items: NbMenuItem[] = [
     {
@@ -36,26 +40,29 @@ export class SharedComponent implements OnInit {
     }
   ]
   constructor(private sidebarService: NbSidebarService,
-              private authService: NbAuthService, 
-              private accountService:AccountService
-    ) { }
+    private authService: NbAuthService,
+    private accountService: AccountService,
+    private userInfoService: UserInfoService,
+    private studentInfoService:StudentInfoService, 
+    private router:Router
+  ) { }
 
   ngOnInit() {
     this.authService.onTokenChange()
-            .subscribe((token: NbAuthSimpleToken) => {
-                if (token.isValid()) {
-                    this.token = token;
-                    this.accountService.getUser(token).subscribe(userData => {
-                        this.userName = userData.FirstName;
-                        console.log(userData)
-                        
-                    })
-                }
-            });
+      .subscribe((token: NbAuthSimpleToken) => {
+        if (token.isValid()) {
+          this.token = token;
+          this.userInfoService.getUser(token).subscribe(userData => {
+            this.userName = userData.FirstName;
+            console.log(userData)
+            this.email = userData.Username;
+          })
+        }
+      });
   }
 
   toggle() {
-    if(this.items.every(x=>x.title == "")){
+    if (this.items.every(x => x.title == "")) {
       this.items = [
         {
           title: "Списки",
@@ -80,12 +87,17 @@ export class SharedComponent implements OnInit {
       ]
     }
     else {
-      this.items.map(x=>x.title = "");
+      this.items.map(x => x.title = "");
     }
     this.sidebarService.toggle(true, 'left');
   }
 
   toggleCompact() {
     this.sidebarService.toggle(true, 'right');
+  }
+
+  goToUserProfile(event){
+    console.log("hello");
+    this.router.navigateByUrl("user-profile/" + this.email)
   }
 }
