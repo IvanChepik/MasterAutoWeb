@@ -47,7 +47,7 @@ import { FormsModule } from '@angular/forms';
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint:"http://twm-webapi.somee.com/api/Account",
+          baseEndpoint:"https://twm-webapi.somee.com/api/Account",
            login: {
              endpoint: '/login',
              method: 'post', 
