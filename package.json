@@ -8,7 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "blyat": "git add . && git commit -m  && git push"
+    "blyat": "git add . && git commit -m  && git push",
+    "postinstall": "ng build --output-path angularapp  --aot --prod"
   },
   "engines": {
     "node": "10.13.0",
@@ -18,11 +19,10 @@
   "dependencies": {
     "@angular/animations": "^8.2.14",
     "@angular/cdk": "^8.2.3",
-    "@angular/cli": "^9.1.6",
     "@angular/common": "~8.2.3",
     "@angular/compiler": "~8.2.3",
     "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "~8.2.3",
+    "@angular/core": "^9.0.0",
     "@angular/forms": "~8.2.3",
     "@angular/material": "^8.2.3",
     "@angular/platform-browser": "~8.2.3",
@@ -53,7 +53,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.803.26",
-    "@angular/cli": "^9.1.6",
+    "@angular/cli": "^9.0.0",
     "@angular/compiler-cli": "^8.2.14",
     "@angular/language-service": "~8.2.3",
     "@schematics/angular": "^8.3.26",
