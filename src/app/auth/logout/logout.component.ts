@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-logout',
-  templateUrl: './logOut.component.html',
+  templateUrl: './logout.component.html',
 })
 export class NgxLogOutComponent extends NbLogoutComponent implements OnInit {
 
