@@ -7,8 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
-
+    "e2e": "ng e2e",
+    "blyat": "git add . && git commit -m  && git push"
   },
   "engines": {
     "node": "10.13.0",
@@ -47,7 +47,7 @@
     "rxjs": "~6.4.0",
     "rxjs-compat": "^6.5.5",
     "tslib": "^1.11.1",
-    "typescript": "~3.7",
+    "typescript": "~3.5.3",
     "xlsx": "^0.15.6",
     "zone.js": "~0.9.1"
   },
@@ -72,6 +72,6 @@
     "protractor": "^5.4.4",
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
-    "typescript": "~3.7"
+    "typescript": "~3.5.3"
   }
 }
