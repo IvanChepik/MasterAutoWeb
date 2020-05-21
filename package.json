@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "blyat": "git add . && git commit -m  && git push",
-    "postinstall": "ng build --output-path angularapp  --aot --prod"
+    "postinstall": "ng build --output-path courseapp  --aot --prod"
   },
   "engines": {
     "node": "10.13.0",
@@ -17,17 +17,18 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^8.2.14",
+    "@akveo/ng2-completer": "^9.0.1",
+    "@angular/animations": "^9.1.9",
     "@angular/cdk": "^8.2.3",
-    "@angular/common": "~8.2.3",
-    "@angular/compiler": "~8.2.3",
-    "@angular/compiler-cli": "^8.2.14",
-    "@angular/core": "^9.0.0",
-    "@angular/forms": "~8.2.3",
+    "@angular/common": "~9.1.9",
+    "@angular/compiler": "~9.1.9",
+    "@angular/compiler-cli": "^9.1.9",
+    "@angular/core": "^9.1.9",
+    "@angular/forms": "~9.1.9",
     "@angular/material": "^8.2.3",
-    "@angular/platform-browser": "~8.2.3",
-    "@angular/platform-browser-dynamic": "~8.2.3",
-    "@angular/router": "~8.2.3",
+    "@angular/platform-browser": "~9.1.9",
+    "@angular/platform-browser-dynamic": "~9.1.9",
+    "@angular/router": "~9.1.9",
     "@azure/ng-deploy": "^0.2.3",
     "@nebular/auth": "^4.6.0",
     "@nebular/bootstrap": "^4.6.0",
@@ -44,18 +45,17 @@
     "ng2-smart-table": "^1.5.0",
     "nginx": "0.0.0",
     "path": "^0.12.7",
-    "rxjs": "~6.4.0",
+    "rxjs": "~6.5.5",
     "rxjs-compat": "^6.5.5",
     "tslib": "^1.11.1",
-    "typescript": "~3.5.3",
+    "typescript": "~3.8.3",
     "xlsx": "^0.15.6",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.10.3"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^0.803.26",
-    "@angular/cli": "^9.0.0",
-    "@angular/compiler-cli": "^8.2.14",
-    "@angular/language-service": "~8.2.3",
+    "@angular-devkit/build-angular": "^0.901.6",
+    "@angular/cli": "^9.1.6",
+    "@angular/language-service": "~9.1.9",
     "@schematics/angular": "^8.3.26",
     "@types/datatables.net": "^1.10.19",
     "@types/jasmine": "~3.3.8",
@@ -71,7 +71,6 @@
     "karma-jasmine-html-reporter": "^1.5.3",
     "protractor": "^5.4.4",
     "ts-node": "~7.0.0",
-    "tslint": "~5.15.0",
-    "typescript": "~3.5.3"
+    "tslint": "~5.15.0"
   }
 }
