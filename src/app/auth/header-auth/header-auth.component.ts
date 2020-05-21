@@ -26,6 +26,7 @@ import { UserInfoService } from '../services/user-info.service';
             .subscribe((token: NbAuthSimpleToken) => {
                 if (token.isValid()) {
                     this.token = token;
+                    console.log("this is token = " + token);
                     this.userInfoService.getUser(token).subscribe(userData => {
                         this.user = userData;
                         this.userName = userData.FirstName;

@@ -53,7 +53,7 @@ export class UserProfileComponent implements OnInit {
         }
       })
 
-      this.userInfoService.getUser(this.token).subscribe(data => {
+      this.userInfoService.getAnotherUserInfo(this.token, this.username).subscribe(data => {
         this.user = data;
       })
     });

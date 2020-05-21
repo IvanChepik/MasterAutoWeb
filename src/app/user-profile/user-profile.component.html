@@ -21,7 +21,9 @@
                     </div>
                 </div>
                 <div class="col-12 col-md-12">
+                    <div *ngIf="isCurrentUser">
                     <button (click)="applyChanges($event)" nbButton>Принять изменения</button>
+                </div>
                     <nb-list>
                         <nb-list-item *ngFor="let field of fields">
                             <div class="block-field-student" *ngIf="!isCurrentUser">

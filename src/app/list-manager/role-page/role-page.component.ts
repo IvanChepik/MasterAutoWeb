@@ -85,5 +85,17 @@ export class RolePageComponent implements OnInit{
     const dialogRef = this.dialogService.open(FieldsDialog, {context: { roleId:roleId}});
   }
 
+  deleteRole(event, roleId:number){
+    this.loading = true;
+    this.roleService.deleteRole(this.token, roleId.toString()).subscribe(data => {
+      this.loading = false;
+      this.roleService.getRoles(this.token).subscribe(data => {
+        this.avaibleRoles = data.roles;
+        this.loading = false;
+        console.log(this.avaibleRoles);
+    })
+    })
+  }
+
 
 }

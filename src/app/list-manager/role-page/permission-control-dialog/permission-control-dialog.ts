@@ -37,7 +37,7 @@ export class PermissionControlDialog implements OnInit{
       .subscribe((token: NbAuthSimpleToken) => {
         this.token = token;
         this.permissionService.getPermissions(token).subscribe(data => {
-            this.allPermissions = data;
+            this.allPermissions = data.permissions;
             this.roleService.getRoleInfo(token, this.roleId.toString()).subscribe(data => {
               console.log(data);
               this.rolePemissions = data.permissions.map(permission => {
@@ -54,6 +54,7 @@ export class PermissionControlDialog implements OnInit{
 
   definedPermissionsOnCheckBoxes(userPemissions:string[]){
     console.log(userPemissions)
+    console.log(this.allPermissions);
     this.allPermissions.forEach(permission => {
       if (userPemissions.indexOf(permission.permissionName) > -1){
         permission.isChecked = true;
@@ -67,6 +68,8 @@ export class PermissionControlDialog implements OnInit{
 
   applyPermissionsChange($event){
 
+    this.loading = true;
+
     var newRolePermissions = this.allPermissions.filter(permission => {
       return (permission.isChecked);
     }).map(permission => {
@@ -76,6 +79,8 @@ export class PermissionControlDialog implements OnInit{
 
     this.roleService.editRole(this.token, this.roleId.toString(), this.roleName, newRolePermissions)
     .subscribe(data => {
+      this.changeEditableState(event);
+      this.loading = false;
     })
   }
 

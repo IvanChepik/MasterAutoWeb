@@ -6,7 +6,7 @@ import {
     HttpInterceptor,
     HttpErrorResponse
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { RedirectService } from './auth/services/redirect.service';
@@ -24,6 +24,9 @@ export class SecureHandleInterceptor implements HttpInterceptor {
                 if (err instanceof HttpErrorResponse) {
                     if (err.status == 400) {
                         this.redirectService.redirectToNoAccess(this.router);
+                    }
+                    if (err.status == 409){
+                        throwError("Что-то пошло не так");
                     }
                     
                 }

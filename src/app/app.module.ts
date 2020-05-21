@@ -35,6 +35,7 @@ import { FormsModule } from '@angular/forms';
     NbListModule,
     FormsModule,
     NbInputModule,
+    NbToastrModule.forRoot(),
     NbSpinnerModule,
     NbCardModule,
     ListManagerRoutingModule,
@@ -46,7 +47,7 @@ import { FormsModule } from '@angular/forms';
       strategies: [
         NbPasswordAuthStrategy.setup({
           name: 'email',
-          baseEndpoint:"https://twm-api.azurewebsites.net/api/Account",
+          baseEndpoint:"http://twm-webapi.somee.com/api/Account",
            login: {
              endpoint: '/login',
              method: 'post', 

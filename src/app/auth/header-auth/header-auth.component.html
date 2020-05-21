@@ -1,8 +1,8 @@
 <ng-container *ngIf = "!isAuth()"> 
         <div class="col-md-12">
             <div class="row show-grid user-info-block">   
-                    <div class="col-6 col-md-5 button-wrap"><button (click)="goToLogin()" nbButton>Sign in</button></div>
-                    <div class="col-6 col-md-5 button-wrap"><button (click)="goToRegister()" nbButton>Register</button></div>          
+                    <div class="col-6 col-md-5 button-wrap"><button (click)="goToLogin()" nbButton>Войти</button></div>
+                             
             </div>
           </div>
 </ng-container>
@@ -11,7 +11,7 @@
         <div class="col-md-12">
             <div class="row show-grid user-info-block">   
                     <div class="col-6 col-md-5 button-wrap"><nb-user shape="rectangle" [name]="userName" [title]=""></nb-user></div>
-                    <div class="col-6 col-md-5 button-wrap"><button (click)="logOut()" nbButton>Log out</button></div>          
+                    <div class="col-6 col-md-5 button-wrap"><button (click)="logOut()" nbButton>Выйти</button></div>          
             </div>
           </div>
 </ng-container>

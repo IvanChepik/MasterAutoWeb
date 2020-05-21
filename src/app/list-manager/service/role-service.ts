@@ -102,7 +102,7 @@ export class RoleService {
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.delete<any>(`${this.url}/Role/${roleId}`, { headers: headers, params: {
+        return this.http.delete<any>(`${this.url}/Role/${roleId}/Field`, { headers: headers, params: {
             fieldName:fieldName
         }});
 

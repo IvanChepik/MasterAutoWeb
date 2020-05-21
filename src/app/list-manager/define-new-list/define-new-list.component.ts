@@ -133,6 +133,7 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
     ngOnInit()
     {
       this.permissionService.getOwnPermission(this.user).subscribe(data => {
+        console.log(this.user);
         if(data.permissions.find(x => x.permissionName == "StudentsListsMaintenance"))
         {
           this.formGroupMapper = this.formBuilder.group({

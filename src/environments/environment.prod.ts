@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://twm-api.azurewebsites.net/'
+  apiUrl: 'http://twm-webapi.somee.com/'
 };

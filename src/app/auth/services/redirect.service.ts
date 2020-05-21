@@ -20,6 +20,14 @@ export class RedirectService {
     redirectToNoAccess(router:Router){
         router.navigateByUrl("action-lists/no-permission");
     }
+
+    redirectToLists(router:Router){
+        router.navigateByUrl("action-lists");
+    }
+
+    redirectToLogin(router:Router){
+        router.navigateByUrl("auth/login");
+    }
     
 
 }

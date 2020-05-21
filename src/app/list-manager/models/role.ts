@@ -7,8 +7,9 @@ export class Role{
         public roleName:string
     )
     {
-    
+        
     }
 
     public isChecked:boolean = false;
+    public permanentField:boolean;
 }

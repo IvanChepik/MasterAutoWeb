@@ -17,15 +17,18 @@
             <nb-list-item *ngFor="let role of avaibleRoles">
                 <div class="col-md-12">
                     <div class="row show-grid">
-                        <div class="col-8 col-md-8">
-                            {{role.roleName}}
+                        <div class="col-6 col-md-6">
+                            {{role?.roleName}}
                         </div>
                         <div class="col-2 col-md-2">
                             <nb-icon icon="eye-outline"  (click)="openControlPermission($event, role.roleId, role.roleName)"></nb-icon>
                         </div>
 
                         <div class="col-2 col-md-2">
-                            <nb-icon icon="eye-outline"  (click)="openFieldDialog($event, role.roleId)"></nb-icon>
+                            <nb-icon icon="edit-2-outline"  (click)="openFieldDialog($event, role.roleId)"></nb-icon>
+                        </div>
+                        <div *ngIf="!(role?.permanentField == true)" class="col-2 col-md-2">
+                            <nb-icon icon="close-outline"  (click)="deleteRole($event, role.roleId)"></nb-icon>
                         </div>
                     </div>
                 </div>

@@ -100,4 +100,8 @@ export class SharedComponent implements OnInit {
     console.log("hello");
     this.router.navigateByUrl("user-profile/" + this.email)
   }
+
+  logOut(evevent){
+    this.router.navigateByUrl("auth/logout");
+  }
 }

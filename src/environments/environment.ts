@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://twm-api.azurewebsites.net/'
+  apiUrl: 'http://twm-webapi.somee.com/'
 };
 
 /*

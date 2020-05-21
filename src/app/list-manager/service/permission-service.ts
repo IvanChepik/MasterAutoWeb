@@ -10,6 +10,7 @@ import { RolePushRequest } from '../models/role-push-request';
 import { Permission } from '../models/permission';
 import { User } from '../models/user';
 import { PermissionUser } from '../models/permission-with-user-name';
+import { DanilaOpyatPomenyalPermission } from '../models/danila-opyat-pomenyal-permission';
 
 
 @Injectable({
@@ -20,14 +21,14 @@ export class PermissionService {
     private url: string = environment.apiUrl + 'api/PermissionService';
     constructor(private http: HttpClient) {}
 
-    getPermissions(token):Observable<Permission[]>{
+    getPermissions(token):Observable<DanilaOpyatPomenyalPermission>{
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
             'Authorization': 'Bearer '+token,
         });
 
-        return this.http.get<any>(`${this.url}/ListOfPermissions`, { headers: headers});
+        return this.http.get<DanilaOpyatPomenyalPermission>(`${this.url}/ListOfPermissions`, { headers: headers});
     }
 
     getOwnPermission(token):Observable<PermissionUser>{

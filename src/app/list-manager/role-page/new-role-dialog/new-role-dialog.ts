@@ -36,7 +36,7 @@ export class NewRoleDialog implements OnInit{
   {
     this.loading =  true;
     this.permissionService.getPermissions(this.token).subscribe(data => {
-        this.permissions = data;
+        this.permissions = data.permissions;
         this.loading = false;
     })    
   }

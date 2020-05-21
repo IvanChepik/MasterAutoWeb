@@ -2,7 +2,7 @@
         <nb-layout-header subheader>
                 <nb-icon id="menu-outline" icon="menu-outline" (click)="toggle()"></nb-icon>
                 <span class="label-container">| Управление списками</span>
-
+                <button nbButton (click)="logOut($event)">Выйти из аккаунта</button>
                 <nb-user (click)="goToUserProfile($event)" size="large" [name]="userName">
                 </nb-user>
 

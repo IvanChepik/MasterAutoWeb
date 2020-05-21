@@ -51,7 +51,7 @@ const formSetting: any = {
 				class: NbAuthSimpleToken,
 				key: 'token',
 			  },
-			baseEndpoint: 'https://twm-api.azurewebsites.net/',
+			baseEndpoint: 'http://twm-webapi.somee.com/',
 
 			 login: {
 				 endpoint: 'api/Account/SignInToAccount',
