@@ -83,7 +83,7 @@ export class MessagerComponent implements OnInit {
   sendMessage(event) {
 
     this.smsService.SendMessage(this.user, this.studentId, event.message).subscribe(data => {
-      this.history.messages.push(new Sms(event.message, new Date(), '1'))
+      this.history.messages.push(new Sms(event.message, new Date(), '1', false))
     }
     )
   }

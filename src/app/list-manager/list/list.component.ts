@@ -40,27 +40,16 @@ export class ListComponent implements OnInit {
 
     mySettings = {
       selectMode: 'multi',
-      
       columns: {
         
       },
 
-      add: {
-        addButtonContent: '<i class="nb-plus"></i>',
-        createButtonContent: '<i class="nb-checkmark"></i>',
-        cancelButtonContent: '<i class="nb-close"></i>',
-      },
-      edit: {
-        editButtonContent: '<i class="nb-edit"></i>',
-        saveButtonContent: '<i class="nb-checkmark"></i>',
-        cancelButtonContent: '<i class="nb-close"></i>',
-      },
-      delete: {
-        deleteButtonContent: '<i class="nb-trash"></i>',
-      },
 
       actions:{
-        
+        columnTitle: 'something',
+        filter:false,
+        edit: false,
+        delete: false,
         custom: 
         [{ name: 'viewrecord', title: '<i class="nb-search"></i>'}],
       }
