@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 import { ReceivedHistory } from '../models/history';
 import { SendMultiplyMessagesRequest } from '../models/send-multiply-sms';
 import { InviteUserRequest } from '../models/invite-user-request';
+import { InviteUserMultiplyRequest } from '../models/invte-user-multiply-model';
 
 @Injectable({
     providedIn: 'root'
@@ -55,7 +56,9 @@ export class EmailService {
             'Authorization': 'Bearer ' + token,
         });
 
-        return this.http.post<any>(`${this.url}/EmailClient/InviteUsers`, studentIds, { headers: headers });
+        var body = new InviteUserMultiplyRequest(studentIds);
+
+        return this.http.post<any>(`${this.url}/EmailClient/InviteUsers`, body, { headers: headers });
     }
 
 }

@@ -13,7 +13,7 @@
                                     <nb-card-body>
                                         <nb-chat class="messager-column" class="messager-part">
                                             <nb-chat-message class="chat-messager" *ngFor="let msg of history?.messages"
-                                                type="text" [message]="msg.messages" [reply]="!msg.ToStudent" [sender]=history.phone
+                                                type="text" [message]="msg.messages" [reply]="msg.ToStudent" [sender]=history.phone
                                                 [date]="msg.date">
                                             </nb-chat-message>
                                             <nb-chat-form (send)="sendMessage($event)">

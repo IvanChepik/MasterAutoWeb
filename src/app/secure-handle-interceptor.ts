@@ -29,6 +29,7 @@ export class SecureHandleInterceptor implements HttpInterceptor {
                         throwError("Что-то пошло не так");
                     }
                     
+                    
                 }
             }));
     }

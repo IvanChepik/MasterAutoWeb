@@ -30,7 +30,7 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
     @ViewChild('formInputCsv', {static:true})
     formInputCsv: ElementRef;
 
-    names: string[] = ['Имя', 'Фамилия', 'Факультет','Группа','Телефон', 'Email']; 
+    names: string[] = ['Имя', 'Фамилия', 'Факультет','Специальность', 'Группа','Телефон', 'Email']; 
 
     formGroupMapper: FormGroup;
 
@@ -68,9 +68,13 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
           console.log(file);
           const data = reader.result;
           workBook = XLSX.read(data, { type: 'binary' });
-          jsonData = workBook.SheetNames.reduce((initial, name) => {
-          const sheet = workBook.Sheets[name];
+          const sheet = workBook.Sheets[workBook.SheetNames[0]];
+
+          console.log(sheet);
+          console.log(sheet['!ref']);
+
           var range = XLSX.utils.decode_range(sheet['!ref']);
+          
           var C, R = range.s.r;
     
           for(C = range.s.c; C <= range.e.c; ++C) {
@@ -84,15 +88,20 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
             
           }
     
-    
-          initial = XLSX.utils.sheet_to_json(sheet, {header: 0, raw: true, defval:" "});
-          return initial;
-          }, {});
+          
+          var initial = XLSX.utils.sheet_to_json(sheet, {header: 0, raw: true, defval:" "});
+
+          jsonData = JSON.stringify(initial);
+
+          console.log(initial)
+
+          console.log(jsonData);
         
-          const dataString = JSON.stringify(jsonData);
+          const dataString = jsonData;
           
           
           this.json = dataString;
+          console.log("HELLO");
           console.log(this.json);
           this.headers = this.getHeaders(headers);
         }

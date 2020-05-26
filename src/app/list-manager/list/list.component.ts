@@ -161,6 +161,19 @@ export class ListComponent implements OnInit {
     this.emailService.inviteStudentMultiply(this.user, studentListIds).subscribe(data => {
       this.loading = false;
       this.showToast('top-right', 'Ваше приглашение отправлено')
+    }, (error) => {
+      console.log(error);
+      this.loading = false;
+      if (error.status == "400"){
+        this.toastrService.show("У пользователей отсутствует поле Email. Пригласите их, через окно информации", "Упс!", { status: 'danger' });
+      }
+      else if (error.status=="409"){
+        this.toastrService.show("Один или несколько пользователей уже зарегистрированы в системе", "Упс!", { status: 'danger' });
+      }
+      else {
+        this.toastrService.show("Что-то пошло не так!", "Упс!", { status: 'danger' });
+      }
+      
     });
   }
 
