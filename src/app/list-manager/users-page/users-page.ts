@@ -22,6 +22,9 @@ export class UsersPageComponent implements OnInit {
   users: User[];
   loading = false;
 
+  isRoles = false;
+  isInvite = false;
+
   constructor(private router: Router,
     private authService: NbAuthService,
     private roleService: RoleService,
@@ -41,16 +44,19 @@ export class UsersPageComponent implements OnInit {
   ngOnInit() {
     this.permService.getOwnPermission(this.token).subscribe(data => {
       if (data.permissions.find(x => x.permissionName == "CanInviteUsers")) {
-        this.loading = true;
+        this.isInvite = true;
+      }
+      if (data.permissions.find(x => x.permissionName == "PermissionServiceAccess")) {
+        this.isRoles = true;
+      }
+      
+
+      this.loading = true;
         this.userInfoService.getUsers(this.token).subscribe(data => {
           this.users = data;
           this.loading = false;
           console.log(data);
         })
-      }
-      else {
-        this.redirectSerice.redirectToNoAccess(this.router);
-      }
 
     });
   }
@@ -75,6 +81,16 @@ export class UsersPageComponent implements OnInit {
 
   openUserInfo(event, userName: string) {
     this.router.navigateByUrl("user-profile/" + userName)
+  }
+
+  exportStudentsToExcel(event) {
+    var students = this.users.filter(user => {
+      if (user.Role.roleId === 2){
+        return true;
+      }
+    });
+
+
   }
 
 }

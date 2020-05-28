@@ -1,6 +1,8 @@
 <nb-card>
-    <invite-users>     
-    </invite-users>
+    <ng-container *ngIf="isInvite">
+        <invite-users>     
+        </invite-users>
+    </ng-container>
     <nb-card-header>
         Пользователи
     </nb-card-header>
@@ -16,9 +18,11 @@
                             {{user.Role?.roleName}}
                         </div>
                         <div class="col-3 col-md-3">
-                            <button nbButton (click)="openChangeRoleModal($event, user)">
-                                Изменить роль
-                            </button>
+                            <ng-container *ngIf="isRoles">
+                                <button nbButton (click)="openChangeRoleModal($event, user)">
+                                    Изменить роль
+                                </button>
+                            </ng-container>
                         </div>
                         <div class="col-1 col-md-1">
                             <nb-icon (click)="openUserInfo($event, user.Username)" icon="eye-outline"></nb-icon>

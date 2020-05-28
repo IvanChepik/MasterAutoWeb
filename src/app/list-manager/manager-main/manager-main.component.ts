@@ -74,4 +74,16 @@ export class ManagerMainComponent implements OnInit {
       return datetime.substring(0,10);
    }
 
+   deleteList(event, listId:number){
+     this.loading = true;
+     this.service.deleteList(listId.toString(), this.user).subscribe(data => {
+       this.loading = false;
+       this.router.navigate(['action-lists/']);
+     })
+   }
+
+   goToList(event, listId:string) {
+     this.router.navigate(['action-lists/view-list/', listId]);
+   }
+
 }

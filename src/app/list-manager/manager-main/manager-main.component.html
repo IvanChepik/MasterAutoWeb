@@ -16,8 +16,8 @@
     <nb-list>
         <nb-list-item *ngFor="let list of lists">
             <div class="col-md-12 col-12">
-                <div [routerLink]="['view-list/', list.ListId]" class="row show-grid list-block">
-                    <div class="col-md-8 col-8">
+                <div (click)="goToList($event, list.ListId)" class="row show-grid list-block">
+                    <div class="col-md-6 col-6">
                         <p class="list-name-text">
                             {{list.Listname}}
                         </p>
@@ -26,6 +26,9 @@
                         <p class="list-date-text">
                             {{translateDateTimeToDate(list.Date)}}
                         </p>
+                    </div>
+                    <div class="delete-icon" class="col-md-2 col-2">
+                        <nb-icon class="trash" icon="trash-outline" (click)="deleteList($event, list.ListId)"></nb-icon>
                     </div>
                 </div>
             </div>

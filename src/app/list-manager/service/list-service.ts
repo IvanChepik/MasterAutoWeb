@@ -13,7 +13,7 @@ import { Observable } from 'rxjs';
 
 export class ListManagerService {
     private url: string = environment.apiUrl + 'api/StudentListsService';
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient) { }
 
     addList(leadListId: number, jsonString: string, mappings: Mapper[], userId: string, listName: string, listOfNewColumns: string[], token): Observable<LeadList> {
 
@@ -21,30 +21,37 @@ export class ListManagerService {
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer '+token,
+            'Authorization': 'Bearer ' + token,
         });
 
         console.log("hello");
         return this.http.post<any>(`${this.url}/StudentList`, body, { headers: headers });
     }
 
-    getListsByUser(token):Observable<ListInfo[]>
-    {
+    getListsByUser(token): Observable<ListInfo[]> {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer '+token,
+            'Authorization': 'Bearer ' + token,
         });
 
         return this.http.get<ListInfo[]>(`${this.url}/StudentLists`, { headers: headers });
     }
 
-    getListById(listId:string, token)
-    {
+    getListById(listId: string, token) {
         const headers = new HttpHeaders({
             'Content-Type': 'application/json; charset=utf-8',
-            'Authorization': 'Bearer '+token,
+            'Authorization': 'Bearer ' + token,
         });
 
-        return this.http.get<any>(`${this.url}/StudentList/${listId}`, { headers: headers});
+        return this.http.get<any>(`${this.url}/StudentList/${listId}`, { headers: headers });
+    }
+
+    deleteList(listId: string, token) {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer ' + token,
+        });
+
+        return this.http.delete<any>(`${this.url}/StudentList/${listId}`, { headers: headers });
     }
 }
