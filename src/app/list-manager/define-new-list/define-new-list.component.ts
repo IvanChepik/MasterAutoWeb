@@ -30,7 +30,7 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
     @ViewChild('formInputCsv', {static:true})
     formInputCsv: ElementRef;
 
-    names: string[] = ['Имя', 'Фамилия', 'Факультет','Специальность', 'Группа','Телефон', 'Email']; 
+    names: string[] = ['Имя', 'Фамилия', 'Факультет','Специальность','Кафедра', 'Группа','Телефон', 'Email']; 
 
     formGroupMapper: FormGroup;
 
@@ -171,9 +171,8 @@ import { RedirectService } from 'src/app/auth/services/redirect.service';
       if(mappers){
         console.log(mappers);
         let address = mappers.filter(x => x.destinationField == "Имя").length > 0;
-        let city = mappers.filter(x => x.destinationField == "Факультет").length > 0;
         let state = mappers.filter(x => x.destinationField == "Телефон").length > 0;
-        if(address && city && state){
+        if(address && state){
         stepper.next();
         }
         else{

@@ -17,14 +17,21 @@
         <nb-list-item *ngFor="let list of lists">
             <div class="col-md-12 col-12">
                 <div (click)="goToList($event, list.ListId)" class="row show-grid list-block">
-                    <div class="col-md-6 col-6">
+                    <div class="col-md-3 col-3">
                         <p class="list-name-text">
                             {{list.Listname}}
                         </p>
                     </div>
-                    <div class="col-md-4 col-4">
+                    <div class="col-md-3 col-3">
                         <p class="list-date-text">
                             {{translateDateTimeToDate(list.Date)}}
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-4">
+                        <p class="list-date-text">
+                            <nb-user [name]="list.CreatedBy" (click)="goToUserProfile($event, list.CreatedBy)" >
+
+                            </nb-user>
                         </p>
                     </div>
                     <div class="delete-icon" class="col-md-2 col-2">

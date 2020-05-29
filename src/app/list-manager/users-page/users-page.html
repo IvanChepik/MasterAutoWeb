@@ -1,13 +1,15 @@
 <nb-card>
     <ng-container *ngIf="isInvite">
-        <invite-users>     
+        <invite-users>
         </invite-users>
     </ng-container>
     <nb-card-header>
         Пользователи
     </nb-card-header>
     <nb-card-body>
-        <button nbButton (click)="exportStudentsToExcel($event)">Вывести студентов в Excel</button>
+        <ng-container *ngIf="isExport">
+            <button nbButton (click)="exportStudentsToExcel($event)">Вывести студентов в Excel</button>
+        </ng-container>
         <nb-list [nbSpinner]="loading" nbSpinnerStatus="success">
             <nb-list-item *ngFor="let user of users">
                 <div class="col-md-12">

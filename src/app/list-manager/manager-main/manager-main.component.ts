@@ -59,6 +59,7 @@ export class ManagerMainComponent implements OnInit {
           this.service.getListsByUser(this.user).subscribe(data => 
             {
                 this.loading = false;
+                console.log(data);
                 this.lists=data;
             })
         }
@@ -85,5 +86,10 @@ export class ManagerMainComponent implements OnInit {
    goToList(event, listId:string) {
      this.router.navigate(['action-lists/view-list/', listId]);
    }
+
+   goToUserProfile(event, userName:string){
+    this.router.navigateByUrl("user-profile/" + userName)
+  }
+
 
 }

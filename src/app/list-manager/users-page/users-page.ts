@@ -27,6 +27,7 @@ export class UsersPageComponent implements OnInit {
   isRoles = false;
   isInvite = false;
   isCanDelete = false;
+  isExport = false;
 
   constructor(private router: Router,
     private authService: NbAuthService,
@@ -56,7 +57,9 @@ export class UsersPageComponent implements OnInit {
       if (data.permissions.find(x => x.permissionName == "CanDeleteUsers")) {
         this.isCanDelete = true;
       }
-      
+      if (data.permissions.find(x => x.permissionName == "DownloadStudentsList")) {
+        this.isExport = true;
+      }
 
       this.loading = true;
         this.userInfoService.getUsers(this.token).subscribe(data => {
