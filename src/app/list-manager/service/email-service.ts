@@ -10,6 +10,7 @@ import { ReceivedHistory } from '../models/history';
 import { SendMultiplyMessagesRequest } from '../models/send-multiply-sms';
 import { InviteUserRequest } from '../models/invite-user-request';
 import { InviteUserMultiplyRequest } from '../models/invte-user-multiply-model';
+import { SendEmailRequest } from '../models/send-email-request';
 
 @Injectable({
     providedIn: 'root'
@@ -59,6 +60,23 @@ export class EmailService {
         var body = new InviteUserMultiplyRequest(studentIds);
 
         return this.http.post<any>(`${this.url}/EmailClient/InviteUsers`, body, { headers: headers });
+    }
+
+    sendEmail(token, email: string, subject: string, message: string): Observable<any> {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer ' + token,
+        });
+
+        if (!subject)
+        {
+            subject = "Без темы";
+        }
+
+        var body = new SendEmailRequest(email, subject, message);
+
+        return this.http.post<any>(`${this.url}/EmailClient/SendEmail`, body, { headers: headers });
+
     }
 
 }

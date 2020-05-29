@@ -9,6 +9,8 @@ import { NbDialogService } from '@nebular/theme';
 import { RoleForUser } from '../models/role-for-user.request';
 import { UserInfoService } from 'src/app/auth/services/user-info.service';
 import { RedirectService } from 'src/app/auth/services/redirect.service';
+import { ModelForExport } from '../models/model-for-export';
+import { ExportService } from '../service/export-service';
 
 
 @Component({
@@ -24,6 +26,7 @@ export class UsersPageComponent implements OnInit {
 
   isRoles = false;
   isInvite = false;
+  isCanDelete = false;
 
   constructor(private router: Router,
     private authService: NbAuthService,
@@ -32,6 +35,7 @@ export class UsersPageComponent implements OnInit {
     private dialogService: NbDialogService,
     private userInfoService: UserInfoService,
     private redirectSerice: RedirectService,
+    private exportService: ExportService,
   ) {
     this.authService.onTokenChange()
       .subscribe((token: NbAuthSimpleToken) => {
@@ -48,6 +52,9 @@ export class UsersPageComponent implements OnInit {
       }
       if (data.permissions.find(x => x.permissionName == "PermissionServiceAccess")) {
         this.isRoles = true;
+      }
+      if (data.permissions.find(x => x.permissionName == "CanDeleteUsers")) {
+        this.isCanDelete = true;
       }
       
 
@@ -84,13 +91,28 @@ export class UsersPageComponent implements OnInit {
   }
 
   exportStudentsToExcel(event) {
+
     var students = this.users.filter(user => {
       if (user.Role.roleId === 2){
         return true;
       }
     });
 
+    var studentsForExport = students.map(student => {
+      return new ModelForExport(student.FirstName+ " " + student.LastName, student.Fields);
+    })
 
+    this.exportService.exportUsersToExcel(studentsForExport);
+  }
+
+  deleteUser(event, userName: string){
+    this.loading = true;
+    this.userInfoService.deleteUser(this.token, userName).subscribe(data => {
+      this.userInfoService.getUsers(this.token).subscribe(users => {
+        this.users = users;
+        this.loading = false;
+      })
+    })
   }
 
 }

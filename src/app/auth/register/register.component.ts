@@ -31,7 +31,6 @@ export class NgxRegisterComponent extends NbRegisterComponent implements OnInit 
     this.route.queryParams.subscribe((queryParam: any) => {
       this.accountService.checkSecureHandle(queryParam['secureHandle']).subscribe((res) => {
         console.log(res);
-
         this.secureHandle = queryParam['secureHandle'];
         this.accountService.preregistrationStep(queryParam['secureHandle']).subscribe(data => {
           this.user.firstName = data.firstName;

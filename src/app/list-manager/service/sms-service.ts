@@ -29,6 +29,19 @@ export class SmsService {
         } });
     }
 
+    sendSmsStandAlone(token, phoneNumber:string, text:string)
+    {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json; charset=utf-8',
+            'Authorization': 'Bearer '+token,
+        });
+
+        return this.http.get<any>(`${this.url}/SendSms`, { headers: headers, params:{
+            text:text,
+            phoneNumber:phoneNumber        
+        } });
+    }
+
     sendSmsMessageMultiply(token, studentIdsList:number[], text:string):Observable<any>
     {
         const headers = new HttpHeaders({

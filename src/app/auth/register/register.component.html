@@ -77,6 +77,7 @@
   <div class="form-control-group">
     <label class="label" for="input-phone">Телефон</label>
     <input nbInput
+          
            [(ngModel)]="user.phoneNumber"
            #phoneNumber="ngModel"
            id="input-phone"
@@ -96,6 +97,7 @@
     <label class="label" for="input-email">Email:</label>
     <input nbInput
            [(ngModel)]="user.email"
+           disabled = "true"
            #email="ngModel"
            id="input-email"
            name="email"

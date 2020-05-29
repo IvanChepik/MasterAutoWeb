@@ -72,5 +72,16 @@ export class UserInfoService {
 
         return this.http.put<any>(`${this.apiPrefix}/CurrentUserInfo/Fields`, fields, { headers: headers });
   }
+
+  deleteUser(token, username:string):Observable<any>{
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json; charset=utf-8',
+      'Authorization': 'Bearer '+token,
+  });
+
+    return this.http.delete<any>(`${this.apiPrefix}/User`, { headers: headers, params:{
+              username:username
+    }});
+  }
     
 }
