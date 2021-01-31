@@ -1,0 +1,8 @@
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="success">
+    <textarea id="textAreaMessage" nbInput [(ngModel)]="message">
+
+    </textarea>
+    <button (click)="sendMessageMultiply($event)" id="buttonSendMessage" nbButton>
+        Отправить выделенным
+    </button>
+</nb-card>

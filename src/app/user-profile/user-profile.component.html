@@ -1,0 +1,93 @@
+<nb-card>
+    <nb-card-header>
+        Информация о пользователе
+    </nb-card-header>
+    <nb-card-body [nbSpinner]="isCredsLoading" nbSpinnerStatus="success">
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-md-6 col-6" [nbSpinner]="isEmailSending">
+                    <ng-container *ngIf="isCanEmail">
+
+                        <ng-container *ngIf="!isEmailOpened">
+                            <button nbButton (click)="changeEmailFormStatement($event)">Открыть форму отправки
+                                email</button>
+                        </ng-container>
+                        <ng-container *ngIf="isEmailOpened">
+                            <button nbButton (click)="changeEmailFormStatement($event)">Закрыть форму</button>
+                            <p>
+                                Тема письма
+                            </p>
+                            <input id="subjectInput" nbInput [(ngModel)]="subject">
+                            <p>
+                                Текст письма
+                            </p>
+                            <textarea id="textInput" nbInput [(ngModel)]="textEmail">
+
+                        </textarea>
+                            <button nbButton (click)="sendEmail($event)">Отправить</button>
+                        </ng-container>
+                    </ng-container>
+                </div>
+                <div class="col-md-6 col-6" [nbSpinner]="isSmsSending">
+                    <!---
+                        <ng-container *ngIf="isCanSms">
+                        <ng-container *ngIf="!isSmsOpened">
+                            <button nbButton (click)="changeSmsFormStatement($event)">Открыть форму отправки
+                                SMS</button>
+                        </ng-container>
+                        <ng-container *ngIf="isSmsOpened">
+                            <button nbButton (click)="changeSmsFormStatement($event)">Закрыть форму</button>               
+                            <p>
+                                Текст SMS
+                            </p>
+                            <textarea id="textInputSms" nbInput [(ngModel)]="textSms">
+
+                        </textarea>
+                            <button nbButton (click)="sendSms($event)">Отправить</button>
+                        </ng-container>
+                    </ng-container>
+                -->
+                    
+                </div>
+                <div class="col-3 col-md-3">
+                    <nb-user size="giant" name="{{user?.FirstName}} {{user?.LastName}}"></nb-user>
+                </div>
+                <div class="col-3 col-md-3">
+                    <p>Телефон</p>
+                    <p>{{user?.PhoneNumber}}</p>
+                </div>
+                <div class="col-6 col-md-6">
+                    <div class="row show-grid">
+                        <div class="col-6 col-md-6">
+                            <p>Почта</p>
+                            <p>{{user?.Username}}</p>
+                        </div>
+                        <div class="col-6 col-md-6">
+                            <p>Роль</p>
+                            {{user?.Role?.roleName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-12">
+                    <div *ngIf="isCurrentUser">
+                        <button (click)="applyChanges($event)" nbButton>Принять изменения</button>
+                    </div>
+                    <nb-list>
+                        <nb-list-item *ngFor="let field of fields">
+                            <div class="block-field-student" *ngIf="!isCurrentUser">
+                                {{field.key}}<br>{{field.value}}
+                            </div>
+                            <div class="block-field-student" *ngIf="isCurrentUser">
+                                <p class="field-key">{{field.key}}</p><br>
+                                <textarea fullWidth nbInput [(ngModel)]="field.value">
+
+                                </textarea>
+
+                            </div>
+                        </nb-list-item>
+                    </nb-list>
+                </div>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

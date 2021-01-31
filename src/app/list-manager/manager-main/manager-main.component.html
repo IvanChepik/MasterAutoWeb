@@ -1,0 +1,44 @@
+<div class="col-md-12 col-12">
+    <div class="row show-grid">
+        <div class="col-md-8 col-8">
+            <p class="manager-header">
+                Имя списка
+            </p>
+        </div>
+        <div class="col-md-4 col-4">
+            <p class="manager-header">
+                Дата создания
+            </p>
+        </div>
+    </div>
+</div>
+<nb-card [nbSpinner]="loading" nbSpinnerStatus="success">
+    <nb-list>
+        <nb-list-item *ngFor="let list of lists">
+            <div class="col-md-12 col-12">
+                <div (click)="goToList($event, list.ListId)" class="row show-grid list-block">
+                    <div class="col-md-3 col-3">
+                        <p class="list-name-text">
+                            {{list.Listname}}
+                        </p>
+                    </div>
+                    <div class="col-md-3 col-3">
+                        <p class="list-date-text">
+                            {{translateDateTimeToDate(list.Date)}}
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-4">
+                        <p class="list-date-text">
+                            <nb-user [name]="list.CreatedBy" (click)="goToUserProfile($event, list.CreatedBy)" >
+
+                            </nb-user>
+                        </p>
+                    </div>
+                    <div class="delete-icon" class="col-md-2 col-2">
+                        <nb-icon class="trash" icon="trash-outline" (click)="deleteList($event, list.ListId)"></nb-icon>
+                    </div>
+                </div>
+            </div>
+        </nb-list-item>
+    </nb-list>
+</nb-card>

@@ -1,0 +1,52 @@
+<nb-card>
+    <nb-card-header>
+        <div class="col-md-12">
+            <div class="row show-grid">
+                <div class="col-7 col-md-7">
+                    <input nbInput [(ngModel)]="newFieldName">
+                    <button nbButton (click)="addFieldToRole($event)">Добавить поле</button>
+                    <p class="header-current-fields">Существующие поля</p>
+                    <nb-list [nbSpinner]="isLoading" nbSpinnerStatus="success">
+                        <nb-list-item *ngFor="let item of fieldGet">
+                            <div class="col-md-12">
+                                <div class="row show-grid">
+                                    <div class="col-5 col-md-5">
+                                        {{item.fieldName}}
+                                    </div>
+                                    <div class="col-2 col-md-2">
+                                        <nb-icon icon="close-outline"
+                                            (click)="deleteFieldFromRole($event, item.fieldName)">
+
+                                        </nb-icon>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-list-item>
+                    </nb-list>
+                </div>
+                <div class="col-5 col-md-5">
+                    Выберите роли, которые будут видеть это поле
+                    <nb-list [nbSpinner]="isRolesLoading" nbSpinnerStatus="success" class="visible-roles-list">
+                        <nb-list-item *ngFor="let role of roles?.roles">
+                            <div class="col-md-12">
+                                <div class="row show-grid">
+                                    <div class="col-7 col-md-7">
+                                        {{role.roleName}}
+                                    </div>
+                                    <div class="col-5 col-md-5">
+                                        <nb-checkbox [(checked)]="role.isChecked" status="primary">
+
+                                        </nb-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                        </nb-list-item>
+                    </nb-list>
+                </div>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+
+    </nb-card-body>
+</nb-card>
