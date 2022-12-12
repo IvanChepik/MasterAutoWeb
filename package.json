@@ -38,7 +38,7 @@
     "angular-localstorage": "^1.1.5",
     "angular-material-data-table": "^0.10.10",
     "eva-icons": "^1.1.3",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "file-saver": "^2.0.2",
     "hammerjs": "^2.0.8",
     "material-table": "^1.57.2",
